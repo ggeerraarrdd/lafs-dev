@@ -1,0 +1,286 @@
+{% extends "cms_layout.html" %}
+
+{% block cmscontent %}
+
+{%- filter indent(width=8) -%}
+
+<div class="cms-content-middle-head">
+    <div class="cms-content-middle-head-left">
+        <a href="/cms">LAFSCMS</a> 
+        <span style="padding-left: 10px; padding-right: 10px;">/</span> 
+        <a href="/cms/series">Series</a> 
+        <span style="padding-left: 10px; padding-right: 10px;">/</span> 
+        <span style="color: #6C757D;">Create</span> 
+    </div>
+    <div class="cms-content-middle-head-right">
+    </div>
+</div>
+
+<!-- Bottom Container - csm create -->
+
+<form name="new" id="new" action="/cms/create" method="post">
+
+    <!-- Create New Series -->
+    <div class="cms-content-middle-body-general">
+
+        <!-- Create New Series - Section - Heading -->
+        <div class="cms-bottom-container-child-section-heading">
+            Create New Series
+        </div>
+        <!-- Create New Series - Section - Body -->
+        <div class="cms-bottom-container-child-section-body">
+            <br>
+            <div style="display: flex;">
+                <div style="margin-right: 30px">
+                    <label for="new_series_semester">Semester</label><br>
+                    <input name="new_series_semester" id="new_series_semester" required><br>
+                    <br>
+                </div>
+                <div>
+                    <label for="new_series_year">Year</label><br>
+                    <input name="new_series_year" id="new_series_year" min="1" max="100000" type="number"
+                        required><br>
+                    <br>
+                </div>
+            </div>
+
+            <label for="new_series_title">Title</label><br>
+            <input name="new_series_title" id="new_series_title" size="100%" required><br>
+            <br>
+
+            <label for="new_series_brief">Brief <i>(Optional)</i></label><br>
+            <textarea rows="5" cols="81" name="new_series_brief" id="new_series_brief" placeholder="Test"
+                form="new">This is a test.</textarea><br>
+            <br>
+
+            <label for="new_series_poster">Poster <i>(Optional)</i></label><br>
+            <input name="new_series_poster" id="new_series_poster" type="file" 
+                style="background-color: white !important; border: none !important;">
+        </div>
+    </div>
+     <!-- Create New Series - End -->
+
+    <!-- Create Schedule -->
+    <div class="cms-content-middle-body-general">
+
+        <!-- Create Schedule - Section - Heading -->
+        <div class="cms-bottom-container-child-section-heading">
+            Create Schedule
+        </div>
+        <!-- Create Schedule - Section - Body -->
+        <div class="cms-bottom-container-child-section-body">
+
+            <div id="films">
+                <div id="film1" class="film">
+
+                    <table>
+                        <tbody>
+                            <tr id="schedule">
+                                <td style="padding: 20px 22px 0px 22px; vertical-align:top">
+                                    <input class="cms-bottom-container-child-section-body-index" id="film_count1"
+                                        placeholder="F">
+                                </td>
+                                <td>
+                                    <br>
+                                    <label for="schedule1">Date</label><br>
+                                    <input name="schedule1" id="schedule1" type="date"><br>
+                                    <br>
+
+                                    <div style="display: flex;">
+                                        <div style="padding-right: 35px">
+                                            <label for="id1">IMDB ID</label><br>
+                                            <input name="id1" id="id1"><br>
+                                        </div>
+                                        <div style="display: flex; justify-content: right; align-items: end;">
+                                            <!--
+                                            <button class="cms-btn-imdb cms-btn cms-btn-primary" type="submit">
+                                                Autofill
+                                            </button>
+                                            -->
+                                        </div>
+                                    </div>
+                                    <br>
+
+                                    <label for="film_title1">Title</label><br>
+                                    <input name="film_title1" id="film_title1" size="80px"><br>
+                                    <br>
+
+                                    <div style="display: flex;">
+                                        <div style="margin-right: 30px">
+                                            <label>Director</label><br>
+                                            <input name="film_director1" id="film_director1" size="55px"><br>
+                                            <br>
+                                        </div>
+
+                                        <div style="margin-right: 30px">
+                                            <label>Year</label><br>
+                                            <input name="film_year1" id="film_year1" min="1" max="100000"
+                                                type="number"><br>
+                                            <br>
+                                        </div>
+
+                                        <div style="margin-right: 30px">
+                                            <label>Runtime</label><br>
+                                            <input name="film_runtime1" id="film_runtime1" min="1" max="100000"
+                                                type="number"><br>
+                                            <br>
+                                        </div>
+                                    </div>
+
+                                    <label>Description</label><br>
+                                    <textarea rows="5" cols="79" name="film_description1" id="film_description1"
+                                        form="new"></textarea><br>
+                                    <br>
+
+                                    <label>Wiki <i>(Optional)</i></label><br>
+                                    <input name="wiki1" id="wiki1" size="80px"><br>
+                                    <br>
+
+                                    <label>Special Note <i>(Optional)</i></label><br>
+                                    <textarea rows="5" cols="79" name="note1" id="note1" form="new"></textarea><br>
+                                    <br>
+
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                </div>
+            </div>
+
+            <!-- Do not delete add-film class -->
+            <div style="padding-top: 20px;">
+                <button class="cms-btn cms-btn-medium cms-btn-create add-film" name="id" type="button">
+                    ADD FILM
+                </button>
+            </div>
+
+            <!-- Clone films div -->
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+            <script>
+                $(function () {
+                    var template = $('#films .film:first').clone();
+                    var filmsCount = 1;
+                    window.addFilm = function () {
+                        filmsCount++;
+                        var film = template.clone().find(':input').each(function () {
+                            var newId = this.id.substring(0, this.id.length - 1) + filmsCount;
+
+                            $(this).prev().prev().attr('for', newId); // update label for
+                            this.name = this.id = newId; // update id and name (assume the same)
+
+                        }).end()
+                            .attr('id', 'film' + filmsCount)
+                            .appendTo('#films');
+                    }
+                    $('.add-film').click(addFilm);
+                });
+            </script>
+
+        </div>
+
+    </div>
+    <!-- Create Schedule - End -->
+
+    <!-- Create Website Theme -->
+    <div class="cms-content-middle-body-general">
+
+        <!-- Create Website Theme - Section - Heading -->
+        <div class="cms-bottom-container-child-section-heading">
+            Create Website Theme
+        </div>
+
+        <!-- Create Website Theme - Section - Body -->
+        <div class="cms-bottom-container-child-section-body">
+
+            <div style="padding: 0px 0px 30px 0px; display: flex; justify-content: center;">
+                <div style="margin-right: 30px">
+                    <br>
+                    <label for="color1">Color #1</label><br>
+                    <input class="colorpicker1" name="color1" id="color1" onkeyup="changeColor1(this.className)">
+                </div>
+
+                <div style="margin-right: 30px">
+                    <br>
+                    <label for="color2">Color #2</label><br>
+                    <input class="colorpicker2" name="color2" id="color2" onkeyup="changeColor2(this.className)">
+                </div>
+
+                <div style="margin-right: 30px">
+                    <br>
+                    <label for="color3">Color #3</label><br>
+                    <input class="colorpicker3" name="color3" id="color3" onkeyup="changeColor3(this.className)">
+                </div>
+            </div>
+
+            <div class="cms-bottom-container-child-section-body-minisite-parent">
+
+                <div class="cms-bottom-container-child-section-body-minisite-child">
+
+                    <!-- Mini Top -->
+                    <div class="mini-top1 mini-top2 cms-bottom-container-child-section-body-minisite-child-top"
+                        style="background-color: #d4d4d4; color: #9a9a9a; transition: background-color 0.5s ease;">
+                        FALL2023<span class="mini-top3" style="color: #454545;">LANDSCAPE<br>
+                            ARCHITECTURE</span>FILMSERIES
+                    </div>
+
+                    <!-- Mini Middle -->
+                    <div class="cms-minisite-middle">
+                        <!-- Mini Middle - Left -->
+                        <div class="mini-midleft1"
+                            style="width: 198px; height: 120px; background-color: #d4d4d4; transition: background-color 0.5s ease;">
+                            &nbsp;
+                        </div>
+                        <!-- Mini Middle - Right -->
+                        <div class="mini-midright1 mini-midright2 cms-bottom-container-child-section-body-minisite-child-right"
+                            style="background-color: #9a9a9a; color: #d4d4d4;">
+                            I Am A Film Series <span class="mini-midright2-subtitle" style="color: #454545;">&nbsp;I Am A Film Series Subtitle</span>
+                        </div>
+                    </div>
+
+                    <!-- Mini Bottom-->
+                    <div class="mini-bottom1"
+                        style="height: 190px; background-color: #d4d4d4; transition: background-color 0.5s ease;">
+                        &nbsp;
+                    </div>
+
+                    <script>
+                        function changeColor1(className) {
+                            document.getElementsByClassName("mini-top1")[0].style.background = document.getElementsByClassName(className)[0].value;
+                            document.getElementsByClassName("mini-midleft1")[0].style.background = document.getElementsByClassName(className)[0].value;
+                            document.getElementsByClassName("mini-midright1")[0].style.color = document.getElementsByClassName(className)[0].value;
+                            document.getElementsByClassName("mini-bottom1")[0].style.background = document.getElementsByClassName(className)[0].value;
+                        }
+                        function changeColor2(className) {
+                            document.getElementsByClassName("mini-top2")[0].style.color = document.getElementsByClassName(className)[0].value;
+                            document.getElementsByClassName("mini-midright2")[0].style.background = document.getElementsByClassName(className)[0].value;
+                        }
+                        function changeColor3(className) {
+                            document.getElementsByClassName("mini-top3")[0].style.color = document.getElementsByClassName(className)[0].value;
+                            document.getElementsByClassName("mini-midright2-subtitle")[0].style.color = document.getElementsByClassName(className)[0].value;
+                        }
+                    </script>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+    <!-- Create Website Theme - End -->
+
+    <!-- Save Buttons -->
+    <div style="padding-left: 30px;">
+        <button class="cms-btn cms-btn-large cms-btn-create" type="submit">
+            SAVE
+        </button>
+    </div>
+    
+</form>
+<!-- End Form -->
+
+
+<!-- End of Bottom Container - Parent -->
+
+{%- endfilter -%}
+
+{% endblock %}
