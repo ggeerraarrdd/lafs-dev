@@ -2,10 +2,12 @@ import os
 import json
 from flask import Flask, redirect, render_template, request, session
 from flask_session import Session
-import pprint 
+from werkzeug.security import check_password_hash, generate_password_hash
+import sqlite3
 
 import queries 
 from form import get_dicts, get_query
+import pprint 
 
 
 # Configure application
@@ -338,22 +340,36 @@ def cmsfilms():
     films = queries.get_info_cms_films(db)
 
     return render_template("cms_films.html", 
-                           films=films,
-                           sidebar="films")
+                            films=films,
+                            sidebar="films")
 
 
-@app.route("/cms/org")
+@app.route("/cms/org", methods=["GET", "POST"])
 def cmsorg():
 
-    users = queries.get_info_users(db)
+    if request.method == "POST":
+        
+        user_id = request.form.get("user-id")
 
-    return render_template("cms_org.html", 
-                           users=users,
-                           sidebar="org")
+        user = queries.get_info_user(db, user_id)
+
+        return render_template("cms_user.html", 
+                               user=user,
+                               sidebar="org")
+    
+    else: 
+
+        users = queries.get_info_users(db)
+
+        return render_template("cms_org.html", 
+                            users=users,
+                            sidebar="org")
 
 
 @app.route("/cms/register", methods=["GET", "POST"])
 def cmsregister():
+
+    # It is best to leave actual implementent of this to a security expert.
 
     if request.method == "POST":
 
@@ -361,13 +377,28 @@ def cmsregister():
         new_name_last = request.form.get("new_name_last")
         new_username = request.form.get("new_username")
         new_password = request.form.get("new_password")
+        new_password_again = request.form.get("new_password_again")
         new_role = request.form.get("new_role")
 
-        print(new_name_first)
-        print(new_name_last)
-        print(new_username)
-        print(new_password)
-        print(new_role)
+        if new_password == new_password_again:
+            
+            new_password = generate_password_hash(new_password_again)
+
+            # Create connection and cursor
+            connection = sqlite3.connect(db, check_same_thread=False)
+            connection.row_factory = sqlite3.Row
+            cursor = connection.cursor()
+
+            # Query db
+            query = "INSERT INTO users (name_first, name_last, role, status, username, hash)"
+            query = query + "VALUES (?, ?, ?, ?, ?, ?); "
+            cursor.execute(query, (new_name_first, new_name_last, new_role, 1, new_username, new_password,))
+
+            connection.commit()
+            
+            # Close cursor and connection
+            cursor.close()
+            connection.close()
 
         return redirect("/cms/org")
 
@@ -376,6 +407,105 @@ def cmsregister():
         return render_template("cms_register.html", 
                                sidebar="org")
 
+
+@app.route("/cms/user", methods=["GET", "POST"])
+def cmsuser():
+
+    if request.method == "POST":
+
+        form_name = request.form.get('form')
+        user_id = request.form.get('user-id')
+
+        user = queries.get_info_user(db, user_id)
+
+        if form_name == "info":
+
+            updated_name_first = request.form.get("updated_name_first")
+            updated_name_last = request.form.get("updated_name_last")
+            updated_username = request.form.get("updated_username")
+            updated_role = request.form.get("new_role")
+
+            update = 0
+
+            if not updated_name_first:
+                updated_name_first = user["name_first"]
+            else:
+                if updated_name_first != user["name_first"]:
+                    update += 1
+
+            if not updated_name_last:
+                updated_name_last = user["name_last"]
+            else:
+                if updated_name_last != user["name_last"]:
+                    update += 1
+            
+            if not updated_username:
+                updated_username = user["username"]
+            else:
+                if updated_username != user["username"]:
+                    update += 1
+
+            if updated_role != user["role"]:
+                update += 1
+
+            if update > 0:
+                queries.update_user_info(db, 
+                                         updated_name_first, 
+                                         updated_name_last, 
+                                         updated_username, 
+                                         updated_role, 
+                                         user_id)
+
+            return redirect("/cms/org")
+
+        elif form_name == "status":
+
+            current_status = int(user["status"])
+            updated_status = int(request.form.get("status"))
+
+            if current_status != updated_status:
+                queries.update_user_status(db, updated_status, user_id)
+
+            return redirect("/cms/org")
+        
+        elif form_name == "pass":
+
+            # It is best to leave actual implementent of this to a security expert.
+
+            pass_current_form = request.form.get("pass_current")
+            pass_updated = request.form.get("pass_updated")
+            pass_updated_again = request.form.get("pass_updated_again")
+
+            if check_password_hash(user["hash"], pass_current_form) and pass_updated == pass_updated_again:
+
+                queries.update_user_hash(db, generate_password_hash(pass_updated_again), user_id)
+
+                print("Password saved")
+
+            else:
+                print("Password not saved")
+
+            return redirect("/cms/org")
+        
+        elif form_name == "delete":
+
+            queries.delete_user(db, user_id)
+
+            return redirect("/cms/org")
+        
+        else:
+
+            return redirect("/cms/org")
+
+    else:
+
+        user_id = request.form.get("user-id")
+
+        print(user_id)
+
+        return render_template("cms_user.html", 
+                               sidebar="org")
+    
 
 @app.route("/cms/media")
 def cmsmedia():

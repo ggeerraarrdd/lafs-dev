@@ -22,12 +22,14 @@ The features of the system are based on business requirements as captured in the
 6. "As an admin or a curator, I want to delete a film series, so that the film series is removed from both the website and database."
 7. "As an admin or a curator, I want to update a scheduled film in an ongoing series, so that website visitors are informed about new nformation."
 8. "As an admin or a curator, I want to see a list of all films in a completed, ongoing or unpublished series, so that I don't duplicate a film in a future series."
-9. "As an admin or a curator, I want perform CRUD operations on poster image files, so that the website and database are up-to-date in terms of the posters."
-10. "As an admin or curator, I want to read documentations on using the film series website and CMS, so that I can update them."
-11. "As an admin, I want to register new users, so that they can access the CMS."
-12. "As an admin, I want to manage user privileges, so that users can access only the CMS functionalities based on their status and roles."
+9. "As an admin or a curator, I want to media files, so that they are correct and up-to-date on the website or database."
+10. "As an admin or curator, I want to read documentations on using the film series website and CMS, so that I can use them properly."
+11. "As an admin or curator, I want to edit my user info and login credentials, so that they are correct and up-to-date."
+12. "As an admin, I want to register new users, so that they can access the CMS."
+13. "As an admin, I want to manage users, so that their info and login credentials are correct and up-to-date.."
+14. "As an admin, I want to manage user privileges, so that users can access only the CMS functionalities based on their status and roles."
 
-As of v2.0.0-alpha.1, all user stories have been implemented except for #1, #6, and #10-12.
+As of v2.0.0-alpha.2, all user stories have been implemented except for #1, #6, #9 and #10.
 
 More screenshots below.
 

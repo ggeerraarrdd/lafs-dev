@@ -1,0 +1,241 @@
+{% extends "cms_layout.html" %}
+
+{% block cmscontent %}
+
+{%- filter indent(width=8) -%}
+
+<div class="cms-content-middle-head">
+    <div class="cms-content-middle-head-left">
+        <a href="/cms">LAFSCMS</a> 
+        <span style="padding-left: 10px; padding-right: 10px;">/</span> 
+        <a href="/cms/org">Org</a> 
+        <span style="padding-left: 10px; padding-right: 10px;">/</span> 
+        <span style="color: #6C757D;">Edit User</span> 
+    </div>
+    <div class="cms-content-middle-head-right">
+    </div>
+</div>
+
+<!-- Bottom Container - csm create -->
+
+<form name="info" id="info" action="/cms/user" method="post">
+
+    <!-- Update User Info -->
+    <div class="cms-content-middle-body-general">
+
+        <!-- Create New Series - Section - Heading -->
+        <div class="cms-bottom-container-child-section-heading">
+            User Info
+        </div>
+        <!-- Create New Series - Section - Body -->
+        <div class="cms-bottom-container-child-section-body">
+
+            <br>
+
+            <div style="display: flex; flex-direction: column;">
+                <div style="margin-right: 30px">
+                    <label for="updated_name_first">First Name</label><br>
+                    <input name="updated_name_first" id="updated_name_first" size="40%" placeholder="{{ user.name_first }}"><br>
+                    <br>
+                </div>
+                <div style="margin-right: 30px">
+                    <label for="updated_name_last">Last Name</label><br>
+                    <input name="updated_name_last" id="updated_name_last" size="40%" placeholder="{{ user.name_last }}"><br>
+                    <br>
+                </div>
+                <div style="margin-right: 30px">
+                    <label for="updated_username">Username</label><br>
+                    <input name="updated_username" id="updated_username" size="40%" placeholder="{{ user.username }}"><br>
+                    <br>
+                </div>
+                <div style="margin-right: 30px">
+                    <label for="updated_role">Role</label><br>
+                    
+                    <select name="new_role" style="width: 200px; height: 30px;">
+                        {% if user.role == 'admin' %}
+                            <option value="" disabled>Select a role</option>
+                            <option value="admin" selected>Admin</option>
+                            <option value="curator">Curator</option>
+                        {% elif user.role == 'curator' %}
+                            <option value="" disabled>Select a role</option>
+                            <option value="admin">Admin</option>
+                            <option value="curator" selected>Curator</option>
+                        {% else %}
+                            <option value="" disabled selected>Select a role</option>
+                            <option value="admin">Admin</option>
+                            <option value="curator" selected>Curator</option>
+                        {% endif %}
+                    </select><br>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- Button - Update User Info -->
+    <div style="padding-left: 30px;">
+        <input type="hidden" name="form" class="hidden-field" value="info">
+        <input type="hidden" name="user-id" class="hidden-field" value={{ user.user_id }}>
+        <button class="cms-btn cms-btn-large cms-btn-create" type="submit">
+            UPDATE USER INFO
+        </button>
+    </div>
+    
+    <br><br><br><br>
+
+</form>
+
+<form name="status" id="status" action="/cms/user" method="post">
+
+    <!-- Update User Status -->
+    <div class="cms-content-middle-body-general">
+
+        <!-- Create New Series - Section - Heading -->
+        <div class="cms-bottom-container-child-section-heading">
+            User Status
+        </div>
+        <!-- Create New Series - Section - Body -->
+        <div class="cms-bottom-container-child-section-body">
+
+            <br>
+
+            <div style="display: flex; flex-direction: column;">
+                <div style="margin-right: 30px">
+
+                    {% if user.status == 1 %}
+                        <input type="radio" id="active" name="status" value="1" checked>
+                        <label for="active">Active</label>
+                        &nbsp;&nbsp;&nbsp;&nbsp;
+                        <input type="radio" id="not-active" name="status" value="0">
+                        <label for="not-active">Not Active</label>
+                    {% elif user.status == 0 %}
+                        <input type="radio" id="active" name="status" value="1">
+                        <label for="active">Active</label>
+                        &nbsp;&nbsp;&nbsp;&nbsp;
+                        <input type="radio" id="not-active" name="status" value="0" checked>
+                        <label for="not-active">Not Active</label>
+                    {% else %}
+                        <input type="radio" id="active" name="status" value="1">
+                        <label for="active">Active</label>
+                        &nbsp;&nbsp;&nbsp;&nbsp;
+                        <input type="radio" id="not-active" name="status" value="0">
+                        <label for="not-active">Not Active</label>
+                    {% endif %}
+
+                </div>
+            </div>
+
+        </div>        
+
+    </div>
+
+    <!-- Button - Update User Status -->
+    <div style="padding-left: 30px;">
+        <input type="hidden" name="form" class="hidden-field" value="status">
+        <input type="hidden" name="user-id" class="hidden-field" value={{ user.user_id }}>
+        <button class="cms-btn cms-btn-large cms-btn-create" type="submit">
+            UPDATE USER STATUS
+        </button>
+    </div>
+
+    <br><br><br><br>
+
+</form>
+
+<form name="pass" id="pass" action="/cms/user" method="post">
+
+    <!-- Update User Password -->
+    <div class="cms-content-middle-body-general">
+
+        <!-- Create New Series - Section - Heading -->
+        <div class="cms-bottom-container-child-section-heading">
+            User Password
+        </div>
+        <!-- Create New Series - Section - Body -->
+        <div class="cms-bottom-container-child-section-body">
+
+            <br>
+
+            <div style="display: flex; flex-direction: column;">
+                <div style="margin-right: 30px">
+                    <label for="pass_current">Current Password</label><br>
+                    <input name="pass_current" id="pass_current" size="40%" required><br>
+                    <br>
+                </div>
+                <div style="margin-right: 30px">
+                    <label for="pass_updated">New Password</label><br>
+                    <input name="pass_updated" id="pass_updated" size="40%" required><br>
+                    <br>
+                </div>
+                <div style="margin-right: 30px">
+                    <label for="passw_updated_again">New Password (again)</label><br>
+                    <input name="pass_updated_again" id="pass_updated_again" size="40%" required><br>
+                    <br>
+                </div>
+            </div>
+
+        </div>  
+
+    </div>
+
+    <!-- Button Update User Password -->
+    <div style="padding-left: 30px;">
+        <input type="hidden" name="form" class="hidden-field" value="pass">
+        <input type="hidden" name="user-id" class="hidden-field" value={{ user.user_id }}>
+        <button class="cms-btn cms-btn-large cms-btn-create" type="submit">
+            UPDATE USER PASSWORD
+        </button>
+    </div>
+    
+</form>
+
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+
+<div class="cms-content-middle-body-general">
+    <!-- Danger -->
+
+    <!-- Danger - Section - Heading -->
+    <div class="cms-bottom-container-child-section-heading">
+        <span style="color: red;">Danger Zone</a>
+    </div>
+    <!-- Danger - Section - Body -->
+    <div class="cms-bottom-container-child-section-body">
+
+        <br>
+
+        <div class="cms-danger-item">
+            <div style="padding-right: 50px;">
+                <b>Delete user</b><br>
+                This will delete record of the user.
+            </div>
+            <div>             
+                <form id="delete-user" name="delete-user" action="/cms/user" method="post">
+                    <input type="hidden" name="form" class="hidden-field" value="delete">
+                    <input type="hidden" name="user-id" class="hidden-field" value={{ user.user_id }}>
+                    <button class="cms-btn-danger" type="button" onclick="confirmClick()">
+                        Delete user
+                    </button>
+                </form>
+                <script>
+                    function confirmClick() {
+                      var result = confirm("Are you sure you want to proceed?");
+                      if (result) {
+                        document.getElementById('delete-user').submit();
+                      } else {
+                        // Cancel the action
+                      }
+                    }
+                </script>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+<!-- End of Bottom Container - Parent -->
+
+{%- endfilter -%}
+
+{% endblock %}

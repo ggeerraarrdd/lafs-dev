@@ -57,9 +57,10 @@
                     {%- endif -%}
                 </td>
                 <td class="text-start">
-                    <form action="" method="get">
-                        <button class="cms-btn cms-btn-small cms-btn-update" name="id" type="submit" value="{{ user.user_id }}">
-                            <span style="padding-left: 10px; padding-right: 10px;">View or Edit</span>
+                    <form action="/cms/org" method="post">
+                        <input type="hidden" name="user-id" class="hidden-field" value="{{ user.user_id }}">
+                        <button class="cms-btn cms-btn-small cms-btn-update" name="user-id" type="submit">
+                            <span style="padding-left: 10px; padding-right: 10px;">Edit</span>
                         </button>
                     </form>
                 </td>
@@ -71,6 +72,6 @@
 
 </div>
 
-<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 
 {% endblock %}

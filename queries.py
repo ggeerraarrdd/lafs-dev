@@ -194,7 +194,8 @@ def get_info_series_status(db, series_id):
 
     series_status = cursor.fetchone()
 
-    # print(len(series_status))
+    connection.close()
+
     return(series_status)
 
 
@@ -225,6 +226,8 @@ def get_info_cms_next_film(db, series_id):
 
     cms_next = cursor.fetchone()
 
+    connection.close()
+
     return(cms_next)
 
 
@@ -254,6 +257,8 @@ def get_info_cms_films(db):
     cursor.execute(query)
 
     cms_films = cursor.fetchall()
+
+    connection.close()
 
     return(cms_films)
 
@@ -287,6 +292,8 @@ def get_info_cms_schedules(db, series_id):
 
     cms_schedules = cursor.fetchall()
 
+    connection.close()
+
     return(cms_schedules)
 
 
@@ -302,7 +309,107 @@ def get_info_users(db):
 
     results = cursor.fetchall()
 
+    connection.close()
+
     return(results)
+
+
+def get_info_user(db, user_id):
+
+    # Create connection and cursor
+    connection = sqlite3.connect(db, check_same_thread=False)
+    connection.row_factory = sqlite3.Row
+    cursor = connection.cursor()
+
+    query = "SELECT * FROM users WHERE user_id = ?; "
+    cursor.execute(query, (user_id,))
+
+    results = cursor.fetchone()
+
+    connection.close()
+
+    return(results)
+
+
+def update_user_info(db, name_first, name_last, username, role, user_id):
+
+    # Create connection and cursor
+    connection = sqlite3.connect(db, check_same_thread=False)
+    connection.row_factory = sqlite3.Row
+    cursor = connection.cursor()
+
+    query = "UPDATE users SET "
+    query = query + "name_first = ?, "
+    query = query + "name_last = ?, "
+    query = query + "username = ?, "
+    query = query + "role = ?, "
+    query = query + "date_updated = datetime('now') "
+    query = query + "WHERE user_id = ?; "
+    cursor.execute(query, (name_first, name_last, username, role, user_id,))
+
+    connection.commit()
+
+    connection.close()
+
+    return 1
+
+
+def update_user_status(db, status, user_id):
+
+    # Create connection and cursor
+    connection = sqlite3.connect(db, check_same_thread=False)
+    connection.row_factory = sqlite3.Row
+    cursor = connection.cursor()
+
+    query = "UPDATE users SET "
+    query = query + "status = ?, "
+    query = query + "date_updated = datetime('now') "
+    query = query + "WHERE user_id = ?; "
+    cursor.execute(query, (status, user_id,))
+
+    connection.commit()
+
+    connection.close()
+
+    return 1
+
+
+def update_user_hash(db, hash, user_id):
+
+    # Create connection and cursor
+    connection = sqlite3.connect(db, check_same_thread=False)
+    connection.row_factory = sqlite3.Row
+    cursor = connection.cursor()
+
+    query = "UPDATE users SET "
+    query = query + "hash = ?, "
+    query = query + "date_updated = datetime('now') "
+    query = query + "WHERE user_id = ?; "
+    cursor.execute(query, (hash, user_id,))
+
+    connection.commit()
+
+    connection.close()
+
+    return 1
+
+
+def delete_user(db, user_id):
+
+    # Create connection and cursor
+    connection = sqlite3.connect(db, check_same_thread=False)
+    connection.row_factory = sqlite3.Row
+    cursor = connection.cursor()
+
+    query = "DELETE FROM users "
+    query = query + "WHERE user_id = ?; "
+    cursor.execute(query, (user_id,))
+
+    connection.commit()
+
+    connection.close()
+
+    return 1
 
 
 def insert_new_series(db, query):

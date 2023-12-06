@@ -36,7 +36,7 @@
                 <td class="text-start">{{ film.film_year }}</td>
                 <td class="text-start">{{ film.film_runtime }}</td>
                 <td class="text-start"><a href="https://www.imdb.com/title/{{- film.id -}}/" target="_blank">{{ film.id }}</a></td>
-                <td class="text-start"><a href="{{ film.wiki }}" target="_blank">wiki</a></td>
+                <td class="text-start"><a href="{{ film.wiki }}" target="_blank" rel="noopener noreferrer">wiki</a></td>
             </tr>
             {% endfor %}
         </tbody>
