@@ -1,6 +1,6 @@
 # LAFSCMS
 
-A companion CMS for the Landscape Architecture Film Series website
+A bespoke CMS for the Landscape Architecture Film Series website
 
 ## Description
 
@@ -8,7 +8,7 @@ _LAFSCMS_ is the companion content management system (CMS) for the _Landscape Ar
 
 Just like any real-world organization, student-run organizations such as a film series experience knowledge loss when their membership graduate. Unless there is a knowledge transfer process, that loss may lead to technical resources being underutilized or altogether becoming inactive. Alternative resources and processes always exist, but they either must be created from scratch, requiring non-zero time and resources, or are imperfect substitutes. If existing resources do the job perfectly fine, why go through all that effort?
 
-_LAFSCMS_ was developed to address the issue of knowledge loss by providing a CMS accessed through a user-friendly web interface to manage content and users.
+_LAFSCMS_ was developed to address that issue of knowledge loss by providing a CMS accessed through a user-friendly web interface to manage content and users.
 
 ![LAFSCMS](/static/images/lafscms_1.png)
 
@@ -41,8 +41,8 @@ ALL CONTENTS IN THIS REPO ARE FOR EDUCATIONAL PURPOSES ONLY.
 
 ### Dependencies
 
-* Flask==2.3.2
-* flask_session==0.5.0
+* Flask==3.0.0
+* Werkzeug==3.0.1
 
 ### Usage
 
