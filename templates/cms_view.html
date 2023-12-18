@@ -175,8 +175,8 @@
 
                                 <label>Special Note <i>(Optional)</i></label><br>
                                 <input type="hidden" value="" placeholder="">
-                                <textarea rows="5" cols="90" name="comment" form="usrform" {{ edit_status
-                                    }}>&nbsp;</textarea><br>
+                                <textarea rows="5" cols="90" name="comment" form="usrform" value="{{ cms_schedule.notes }}" 
+                                    placeholder="{{ cms_schedule.notes }}" {{ edit_status }}></textarea><br>
                                 <br>
 
                             </td>
