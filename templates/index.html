@@ -2,18 +2,18 @@
 
 {% block title %}{{ series.semester }} — {{ series.series_title }}{% endblock %}
 
-{% block main %}
+{%- block main %}
+    {%- filter indent(width=8) %}
+        <div class="middle-container-right-index middle-container-right-index-screen">
 
-<div class="middle-container-right-index middle-container-right-index-screen">
+            <span style="color: {{ series.color1 }};">{{ series.series_title.upper() }} 
+            <span style="color: {{ series.color3 }};">
+                {{ series.series_brief.upper() }} 
+                {%- if series.series_poster_url %}
+                <a href="{{ series.series_poster_url }}" style="color: {{ series.color3 }};" target="_blank" rel="noopener noreferrer">POSTER</a>
+                {%- endif %}
+            </span>
 
-    <span style="color: {{ series.color1 }};">{{ series.series_title.upper() }} 
-    <span style="color: {{ series.color3 }};">
-        {{ series.series_brief.upper() }} 
-        {% if series.series_poster_url %}
-        <a href="{{ series.series_poster_url }}" style="color: {{ series.color3 }};" target="_blank" rel="noopener noreferrer">POSTER</a>
-        {% endif %}
-    </span>
-
-</div>
-
+        </div>
+    {%- endfilter %}
 {% endblock %}

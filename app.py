@@ -7,7 +7,6 @@ import sqlite3
 
 import queries 
 from form import get_dicts, get_query
-import pprint 
 
 
 # Configure application
@@ -24,15 +23,13 @@ Session(app)
 # Set SQLite database variable
 db = "lafs.db"
 
-# Make sure Google Maps API key is set
+# # Make sure Google Maps API key is set
 # if not os.environ.get("MAP_API_KEY"):
-#     print("INFO: MAP_API_KEY not set")
-#     print("INFO: Get a Google Maps API Key")
-#     print("INFO: On terminal, excecute: 'export MAP_API_KEY=value'")
-
-#     raise RuntimeError("MAP_API_KEY not set")
+#     print("INFO: Environment variable MAP_API_KEY is missing")
+#     print("INFO: Read documentation in README.md")
+#     raise RuntimeError
 # else:
-#     print("MAP_API_KEY set")
+#     print("INFO: Environment variable MAP_API_KEY is set")
 #     map_api_key = os.environ.get("MAP_API_KEY")
     
 
