@@ -67,7 +67,7 @@ def get_info_schedules(db, series_id):
     query = "SELECT strftime('%d', schedule) AS day, "
     query = query + "f.id, "
     query = query + "rtrim (substr ('January  February March    April    May      June     July     August   SeptemberOctober  November December', strftime ('%m', schedule) * 9 - 8, 9)) AS month, "
-    query = query + "film_title, film_director, film_year, film_runtime, wiki, sc.schedule, sc.notes "
+    query = query + "film_title, film_director, film_year, film_runtime, wiki, sc.schedule_id, sc.schedule, sc.notes "
     query = query + "FROM series AS se "
     query = query + "JOIN schedules AS sc ON se.series_id = sc.series_id "
     query = query + "JOIN films AS f ON sc.film_id = f.id "
@@ -213,6 +213,7 @@ def get_info_cms_next_film(db, series_id):
     query = query + "film_year, "
     query = query + "film_runtime, "
     query = query + "wiki, "
+    query = query + "sc.schedule_id, "
     query = query + "sc.schedule, "
     query = query + "sc.notes "
     query = query + "FROM series AS se "
@@ -272,6 +273,7 @@ def get_info_cms_schedules(db, series_id):
 
     query = "SELECT  "
     query = query + "s.series_id "
+    query = query + ",sc.schedule_id "
     query = query + ",sc.schedule  "
     query = query + ",sc.film_id "
     query = query + ",sc.notes"
@@ -444,5 +446,21 @@ def insert_new_records(db, query):
     cursor.execute(query)
 
     connection.commit()
+
+    return 1
+
+
+def update_records(db, query):
+
+    # Create connection and cursor
+    connection = sqlite3.connect(db, check_same_thread=False)
+    connection.row_factory = sqlite3.Row
+    cursor = connection.cursor()
+
+    cursor.execute(query)
+
+    connection.commit()
+
+    connection.close()
 
     return 1

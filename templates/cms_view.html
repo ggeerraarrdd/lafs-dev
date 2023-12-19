@@ -22,7 +22,7 @@
 
 <!-- Bottom Container - cms view-->
 
-<form>
+<form name="updates" id="updates" action="/cms/view" method="post">
 
     <!-- Film Series -->
     <div class="cms-content-middle-body-general">
@@ -30,9 +30,13 @@
         <!-- Film Series - Section - Heading -->
         <div class="cms-bottom-container-child-section-heading">
             <div>
-                Film Series
+                <!-- Series Number -->
+                Film Series #{{ cms_series.series_id }}
+                <input type="hidden" name="series_number" id="series_number" 
+                    value="{{ cms_series.series_id }}">
             </div>
             <div class="cms-bottom-container-child-section-heading-right">
+                <!-- Series Status -->
                 <div style="padding-right: 60px;">
                     Status:
                     {% if cms_status.status == 1 -%}
@@ -53,15 +57,15 @@
             <div style="display: flex;">
                 <div style="margin-right: 30px">
                     <br>
-                    <label for="semester">Semester</label><br>
-                    <input name="semester" id="semester" value="{{ cms_series.series_semester }}"
+                    <label for="series_semester">Semester</label><br>
+                    <input name="series_semester" id="series_semester" 
                         placeholder="{{ cms_series.series_semester }}" {{ edit_status }}><br>
                     <br>
                 </div>
                 <div>
                     <br>
-                    <label for="year">Year</label><br>
-                    <input name="year" id="year" value="{{ cms_series.series_year }}"
+                    <label for="series_year">Year</label><br>
+                    <input name="series_year" id="year" 
                         placeholder="{{ cms_series.series_year }}" min="1" max="100000" type="number" {{ edit_status
                         }}><br>
                     <br>
@@ -69,15 +73,13 @@
             </div>
 
             <label for="series_title">Title</label><br>
-            <input name="series_title" id="series_title" size="100%" value="{{ cms_series.series_title }}"
+            <input name="series_title" id="series_title" size="100%" 
                 placeholder="{{ cms_series.series_title }}" {{ edit_status }}><br>
             <br>
 
-            <label for="series_description">Description <i>(Optional)</i></label><br>
-            <input name="series_description" id="series_description" type="hidden"
-                value="{{ cms_series.series_brief }}">
-            <textarea name="series_description" id="series_description" form="usrform" {{ edit_status }} rows="5"
-                cols="100">{{- cms_series.series_brief -}}</textarea><br>
+            <label for="series_brief">Brief <i>(Optional)</i></label><br>
+            <textarea name="series_brief" id="series_brief" form="updates" {{ edit_status }} rows="5"
+                cols="100" placeholder="{{ cms_series.series_brief }}"></textarea><br>
             <br>
 
             <label for="series_poster">Poster <i>(Optional)</i></label><br>
@@ -104,22 +106,28 @@
                     <table>
                         <tr>
                             <td style="padding: 20px 22px 0px 22px; vertical-align:top">
-                                <div class="cms-bottom-container-child-section-body-index {{ edit_status }}">
+                                <div class="cms-bottom-container-child-section-body-index {{- edit_status }}">
                                     {{- loop.index -}}
                                 </div>
                             </td>
                             <td>
                                 <br>
-                                <label for="date">Date</label><br>
-                                <input type="date" name="date" id="date" value="{{ cms_schedule.schedule }}"
-                                    placeholder="{{ cms_schedule.schedule }}" {{ edit_status }}><br>
+                                <!-- Schedule ID -->
+                                <input type="hidden" name="schedule_id{{- loop.index -}}" id="schedule_id{{- loop.index -}}" 
+                                    value="{{ cms_schedule.schedule_id }}">
+                                <!-- Date -->
+                                <label for="schedule{{- loop.index -}}">Date</label><br>
+                                <input name="schedule{{- loop.index -}}" id="schedule{{- loop.index -}}" 
+                                    type="text" onfocus="(this.type='date')" 
+                                    value="{{ cms_schedule.schedule }}" {{ edit_status }}><br>
                                 <br>
 
+                                <!-- IMDB ID -->
                                 <div style="display: flex;">
                                     <div style="padding-right: 35px">
-                                        <label for="imdb">IMDB ID</label><br>
-                                        <input name="imdb" id="imdb" value="{{ cms_schedule.film_id }}"
-                                            placeholder="{{ cms_schedule.film_id }}" {{ edit_status }}><br>
+                                        <label for="imdb{{- loop.index -}}">IMDB ID</label><br>
+                                        <input name="imdb{{- loop.index -}}" id="imdb{{- loop.index -}}" 
+                                            value="{{ cms_schedule.film_id }}" {{ edit_status }}><br>
                                     </div>
                                     <div style="display: flex; justify-content: right; align-items: end;">
                                         <!-- 
@@ -131,51 +139,58 @@
                                 </div>
                                 <br>
 
-                                <label for="film_title">Title</label><br>
-                                <input name="film_title" id="film_title" size="90px" value="{{ cms_schedule.film_title }}"
+                                <!-- Title -->
+                                <label for="film_title{{- loop.index -}}">Title</label><br>
+                                <input name="film_title{{- loop.index -}}" id="film_title{{- loop.index -}}" size="90px"
                                     placeholder="{{ cms_schedule.film_title }}" {{ edit_status }}><br>
                                 <br>
 
                                 <div style="display: flex;">
+
+                                    <!-- Director -->
                                     <div style="margin-right: 30px">
-                                        <label for="director">Director</label><br>
-                                        <input name="director" id="director" size="64px"
-                                            value="{{ cms_schedule.film_director }}"
+                                        <label for="film_director{{- loop.index -}}">Director</label><br>
+                                        <input name="film_director{{- loop.index -}}" id="film_director{{- loop.index -}}" size="64px"
                                             placeholder="{{ cms_schedule.film_director }}" {{ edit_status }}><br>
                                         <br>
                                     </div>
 
+                                    <!-- Year -->
                                     <div style="margin-right: 30px">
-                                        <label for="film_year">Year</label><br>
-                                        <input name="film_year" id="film_year" min="1" max="100000" type="number"
-                                            value="{{ cms_schedule.film_year }}" placeholder="{{ cms_schedule.film_year }}"
-                                            {{ edit_status }}><br>
+                                        <label for="film_year{{- loop.index -}}">Year</label><br>
+                                        <input name="film_year{{- loop.index -}}" id="film_year{{- loop.index -}}" 
+                                            type="number" min="1" max="100000" 
+                                            placeholder="{{ cms_schedule.film_year }}" {{ edit_status }}><br>
                                         <br>
                                     </div>
 
+                                    <!-- Runtime -->
                                     <div style="margin-right: 30px">
-                                        <label for="film_runtime">Runtime</label><br>
-                                        <input name="film_runtime" id="film_runtime" min="1" max="100000" type="number"
-                                            value="{{ cms_schedule.film_runtime }}"
+                                        <label for="film_runtime{{- loop.index -}}">Runtime</label><br>
+                                        <input name="film_runtime{{- loop.index -}}" id="film_runtime{{- loop.index -}}" 
+                                            type="number" min="1" max="100000" type="number"
                                             placeholder="{{ cms_schedule.film_runtime }}" {{ edit_status }}><br>
                                         <br>
                                     </div>
                                 </div>
 
-                                <label>Description</label><br>
-                                <input type="hidden" value="" placeholder="{{ cms_schedule.film_description }}">
-                                <textarea rows="5" cols="90" name="comment" form="usrform" {{ edit_status
-                                    }}>{{- cms_schedule.film_description -}}</textarea><br>
+                                <!-- Description -->
+                                <label for="film_description{{- loop.index -}}">Description</label><br>
+                                <textarea name="film_description{{- loop.index -}}" id="film_description{{- loop.index -}}"
+                                    rows="5" cols="90" 
+                                    placeholder="{{ cms_schedule.film_description }}" {{ edit_status }}></textarea><br>
                                 <br>
 
+                                <!-- Wiki -->
                                 <label for="wiki">Wiki <i>(Optional)</i></label><br>
-                                <input name="wiki" id="wiki" size="90px" value="{{ cms_schedule.wiki }}"
+                                <input name="wiki{{- loop.index -}}" id="wiki{{- loop.index -}}" size="90px" 
                                     placeholder="{{ cms_schedule.wiki }}" {{ edit_status }}><br>
                                 <br>
 
-                                <label>Special Note <i>(Optional)</i></label><br>
-                                <input type="hidden" value="" placeholder="">
-                                <textarea rows="5" cols="90" name="comment" form="usrform" value="{{ cms_schedule.notes }}" 
+                                <!-- Special Notes -->
+                                <label>Special Notes <i>(Optional)</i></label><br>
+                                <textarea name="notes{{- loop.index -}}" id="notes{{- loop.index -}}" 
+                                    rows="5" cols="90" 
                                     placeholder="{{ cms_schedule.notes }}" {{ edit_status }}></textarea><br>
                                 <br>
 
@@ -311,21 +326,25 @@
                 <div style="margin-right: 30px">
                     <br>
                     <label for="color1">Color #1</label><br>
-                    <input class="colorpicker1" name="color1" id="color1"   onkeyup="changeColor1(this.className)">
+                    <input class="colorpicker1" name="color1" id="color1" 
+                        placeholder="{{ cms_series.color1 }}" {{ edit_status }} 
+                        onkeyup="changeColor1(this.className)">
                 </div>
 
                 <div style="margin-right: 30px">
                     <br>
                     <label for="color2">Color #2</label><br>
-                    <input class="colorpicker2" name="color2" id="color2" value="{{ cms_series.bgcolor2 }}"
-                        placeholder="{{ cms_series.color2 }}" {{ edit_status }} onkeyup="changeColor2(this.className)">
+                    <input class="colorpicker2" name="color2" id="color2" 
+                        placeholder="{{ cms_series.color2 }}" {{ edit_status }} 
+                        onkeyup="changeColor2(this.className)">
                 </div>
 
                 <div style="margin-right: 30px">
                     <br>
                     <label for="color3">Color #3</label><br>
-                    <input class="colorpicker3" name="color3" id="color3" value="{{ cms_series.text_color3 }}"
-                        placeholder="{{ cms_series.color3 }}" {{ edit_status }} onkeyup="changeColor3(this.className)">
+                    <input class="colorpicker3" name="color3" id="color3" 
+                        placeholder="{{ cms_series.color3 }}" {{ edit_status }} 
+                        onkeyup="changeColor3(this.className)">
                 </div>
             </div>
 
@@ -394,7 +413,7 @@
 
     <!-- Save Buttons -->
     <div style="padding-left: 30px;">
-        <button class="cms-btn cms-btn-large cms-btn-create" type="button" {{ edit_status }}>
+        <button class="cms-btn cms-btn-large cms-btn-create" type="submit" {{ edit_status }}>
             SAVE
         </button>
     </div>

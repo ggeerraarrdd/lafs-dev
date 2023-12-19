@@ -6,7 +6,7 @@ from werkzeug.security import check_password_hash, generate_password_hash
 import sqlite3
 
 import queries 
-from form import get_dicts, get_query
+from form import get_dicts, get_query, get_dicts_updates, get_query_update_series, get_query_update_schedules
 
 
 # Configure application
@@ -289,6 +289,48 @@ def cmscreate():
 def cms_view():
 
     if request.method == "POST":
+
+        post = request.form.to_dict()
+
+        # print(json.dumps(post, indent=4))
+
+        dicts = get_dicts_updates(post)
+        dict_series = dicts[0]
+        dict_schedule = dicts[1]
+        # dict_films = dicts[2]
+        # dict_colors = dicts[3]
+
+        # print(json.dumps(dict_series, indent=4))
+        # print(json.dumps(dict_schedule, indent=4))
+        # print(json.dumps(dict_films, indent=4))
+        # print(json.dumps(dict_colors, indent=4))
+    
+        #
+        # FILM SERIES
+        #
+        # 1. Translate dict into SQL query
+        query_series = get_query_update_series(dict_series)
+        # 2. Execute query
+        if query_series is not None:
+            print(query_series)
+            queries.update_records(db, query_series)
+        else:
+            print("Series: nothing to update")
+
+        #
+        # SCHEDULE
+        #
+        # 0. Update dictionary
+        for film in dict_schedule:
+            if "id" in dict_schedule[film]:
+                dict_schedule[film]["film_id"] = dict_schedule[film].pop("id")
+        # 1. Translate dict into SQL query
+        query_schedule = get_query_update_schedules(dict_schedule)
+        print(query_schedule)
+        # 2. Execute query
+        if query_schedule is not None:
+            for query in query_schedule:
+                queries.update_records(db, query)
 
         return redirect("/cms")
     
