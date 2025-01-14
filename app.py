@@ -1,3 +1,6 @@
+# Python Standard Library
+import os
+
 # Third-Party Libraries
 from flask import Flask
 from flask_session import Session
@@ -12,9 +15,10 @@ from blueprints.cms import cms
 # Configure application
 app = Flask(__name__)
 
-app.register_blueprint(main)
-app.register_blueprint(cms)
+# Set secret key for session management
+app.config['SECRET_KEY'] = os.getenv('SECRET_KEY')
 
+# Disable file caching and enable template auto-reloading
 app.config['SEND_FILE_MAX_AGE_DEFAULT'] = 0
 app.config['TEMPLATES_AUTO_RELOAD'] = True
 
@@ -22,4 +26,9 @@ app.config['TEMPLATES_AUTO_RELOAD'] = True
 app.config["SESSION_PERMANENT"] = False
 app.config["SESSION_TYPE"] = "filesystem"
 
+# Initialize session with the app
 Session(app)
+
+# Register blueprints for main and cms routes
+app.register_blueprint(main)
+app.register_blueprint(cms)
