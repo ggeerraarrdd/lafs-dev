@@ -1,0 +1,40 @@
+{% extends "layout.html" %}
+
+{% block title %}{{ series.series_title }}{% endblock %}
+
+{%- block main %}
+    {%- filter indent(width=8) %}
+        <div class="middle-container-right-film middle-container-right-film-screen">
+
+            <!-- Film - Schedule -->
+            {%- for schedule in schedules %}
+            {%- if schedule.id == film.id %}
+            {{ schedule.day }}.{{ schedule.month.lower() }}<br>
+            {%- endif %}
+            {%- endfor %}
+
+            <!-- Film - Title -->
+            <span class="middle-container-right-film-title middle-container-right-film-title-screen" style="color: {{ series.color3 }};">
+                {{ film.film_title.upper() }}<br>
+            </span>
+
+            <!-- Film - Director / Year / Runtime-->
+            (dir. {{ film.film_director }}, {{ film.film_year }}, {{ film.film_runtime }}min)<br>
+            <br>
+
+            <!-- Film - Description -->
+            {%- if film.film_description %}
+            <span style="display: inline-block; width: 60%;">
+                {{ film.film_description }}
+            </span><br>
+            <br>
+            {%- endif %}
+
+            <!-- Film - Wiki -->
+            {%- if film.wiki %}
+            <a href="{{ film.wiki }}" style="color: {{ series.color3 }};" target="_blank" rel="noopener noreferrer">wiki</a>
+            {%- endif %}
+
+        </div>
+    {%- endfilter %}
+{% endblock %}

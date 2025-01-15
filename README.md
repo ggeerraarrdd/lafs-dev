@@ -10,7 +10,7 @@ Just like any real-world organization, student-run organizations such as a film 
 
 _LAFSCMS_ was developed to address that issue of knowledge loss by providing a CMS accessed through a user-friendly web interface to manage content and users.
 
-![LAFSCMS](/static/images/lafscms_1.png)
+![LAFSCMS](/assets/images/lafscms_1.png)
 
 The features of the system are based on business requirements as captured in the following user stories:
 
@@ -90,9 +90,9 @@ Development of primary features is ongoing.
 
 ## Screenshots
 
-![LAFSCMS](/static/images/lafscms_2.png)
-![LAFSCMS](/static/images/lafscms_3.png)
-![LAFSCMS](/static/images/lafscms_4.png)
-![LAFSCMS](/static/images/lafscms_5.png)
-![LAFSCMS](/static/images/lafscms_6.png)
-![LAFSCMS](/static/images/lafscms_7.png)
+![LAFSCMS](assets/images/lafscms_2.png)
+![LAFSCMS](assets/images/lafscms_3.png)
+![LAFSCMS](assets/images/lafscms_4.png)
+![LAFSCMS](assets/images/lafscms_5.png)
+![LAFSCMS](assets/images/lafscms_6.png)
+![LAFSCMS](assets/images/lafscms_7.png)

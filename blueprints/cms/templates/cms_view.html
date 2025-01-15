@@ -1,0 +1,503 @@
+{% extends "cms_layout.html" %}
+
+{% block cmscontent %}
+
+{%- filter indent(width=8) -%}
+
+<div class="cms-content-middle-head">
+    <div class="cms-content-middle-head-left">
+        <a href="/cms">LAFSCMS</a> 
+        <span style="padding-left: 10px; padding-right: 10px; color: #6C757D;">/</span> 
+        <a href="/cms/series">Film Series</a> 
+        <span style="padding-left: 10px; padding-right: 10px; color: #6C757D;">/</span> 
+        {% if cms_status.status == 1 -%}
+            <span style="color: #6C757D;">View Only</span>
+        {%- else -%}
+            <span style="color: #6C757D;">View or Edit</span> 
+        {%- endif -%}
+    </div>
+    <div class="cms-content-middle-head-right">
+    </div>
+</div>
+
+<!-- Bottom Container - cms view-->
+
+<form name="updates" id="updates" action="/cms/view" method="post">
+
+    <!-- Film Series -->
+    <div class="cms-content-middle-body-general">
+
+        <!-- Film Series - Section - Heading -->
+        <div class="cms-bottom-container-child-section-heading">
+            <div>
+                <!-- Series Number -->
+                Film Series #{{ cms_series.series_id }}
+                <input type="hidden" name="series_number" id="series_number" 
+                    value="{{ cms_series.series_id }}">
+            </div>
+            <div class="cms-bottom-container-child-section-heading-right">
+                <!-- Series Status -->
+                <div style="padding-right: 60px;">
+                    Status:
+                    {% if cms_status.status == 1 -%}
+                    Completed
+                    {%- elif cms_status.status == 0 and cms_series.series_display == "Yes" -%}
+                    Ongoing
+                    {%- else -%}
+                    Draft
+                    {%- endif -%}
+                </div>
+                <div>
+                    Visible: {{ cms_series.series_display }}
+                </div>
+            </div>
+        </div>
+        <!-- Film Series - Section - Body -->
+        <div class="cms-bottom-container-child-section-body">
+            <div style="display: flex;">
+                <div style="margin-right: 30px">
+                    <br>
+                    <label for="series_semester">Semester</label><br>
+                    <input name="series_semester" id="series_semester" 
+                        placeholder="{{ cms_series.series_semester }}" {{ edit_status }}><br>
+                    <br>
+                </div>
+                <div>
+                    <br>
+                    <label for="series_year">Year</label><br>
+                    <input name="series_year" id="year" 
+                        placeholder="{{ cms_series.series_year }}" min="1" max="100000" type="number" {{ edit_status
+                        }}><br>
+                    <br>
+                </div>
+            </div>
+
+            <label for="series_title">Title</label><br>
+            <input name="series_title" id="series_title" size="100%" 
+                placeholder="{{ cms_series.series_title }}" {{ edit_status }}><br>
+            <br>
+
+            <label for="series_brief">Brief <i>(Optional)</i></label><br>
+            <textarea name="series_brief" id="series_brief" form="updates" {{ edit_status }} rows="5"
+                cols="100" placeholder="{{ cms_series.series_brief }}"></textarea><br>
+            <br>
+
+            <label for="series_poster">Poster <i>(Optional)</i></label><br>
+            <input style="border: none !important; background-color: transparent !important;" name="series_poster" 
+                id="series_poster" type="file" {{ edit_status }}>
+        </div>
+
+    </div>
+
+    <!-- Schedules -->
+    <div class="cms-content-middle-body-general">
+
+        <!-- Schedules - Section - Heading -->
+        <div class="cms-bottom-container-child-section-heading">
+            Schedule
+        </div>
+        <!-- Schedules - Section - Body -->
+        <div class="cms-bottom-container-child-section-body">
+
+            {% if cms_schedules|length > 0 %}
+
+                {% for cms_schedule in cms_schedules %}
+                <div class="film">
+                    <table>
+                        <tr>
+                            <td style="padding: 20px 22px 0px 22px; vertical-align:top">
+                                <div class="cms-bottom-container-child-section-body-index {{- edit_status }}">
+                                    {{- loop.index -}}
+                                </div>
+                            </td>
+                            <td>
+                                <br>
+                                <!-- Schedule ID -->
+                                <input type="hidden" name="schedule_id{{- loop.index -}}" id="schedule_id{{- loop.index -}}" 
+                                    value="{{ cms_schedule.schedule_id }}">
+                                <!-- Date -->
+                                <label for="schedule{{- loop.index -}}">Date</label><br>
+                                <input name="schedule{{- loop.index -}}" id="schedule{{- loop.index -}}" 
+                                    type="text" onfocus="(this.type='date')" 
+                                    value="{{ cms_schedule.schedule }}" {{ edit_status }}><br>
+                                <br>
+
+                                <!-- IMDB ID -->
+                                <div style="display: flex;">
+                                    <div style="padding-right: 35px">
+                                        <label for="imdb{{- loop.index -}}">IMDB ID</label><br>
+                                        <input name="imdb{{- loop.index -}}" id="imdb{{- loop.index -}}" 
+                                            value="{{ cms_schedule.film_id }}" {{ edit_status }}><br>
+                                    </div>
+                                    <div style="display: flex; justify-content: right; align-items: end;">
+                                        <!-- 
+                                        <button class="cms-btn-imdb cms-btn cms-btn-primary" type="submit" {{ edit_status }}>
+                                            Autofill
+                                        </button> 
+                                        -->
+                                    </div>
+                                </div>
+                                <br>
+
+                                <!-- Title -->
+                                <label for="film_title{{- loop.index -}}">Title</label><br>
+                                <input name="film_title{{- loop.index -}}" id="film_title{{- loop.index -}}" size="90px"
+                                    placeholder="{{ cms_schedule.film_title }}" {{ edit_status }}><br>
+                                <br>
+
+                                <div style="display: flex;">
+
+                                    <!-- Director -->
+                                    <div style="margin-right: 30px">
+                                        <label for="film_director{{- loop.index -}}">Director</label><br>
+                                        <input name="film_director{{- loop.index -}}" id="film_director{{- loop.index -}}" size="64px"
+                                            placeholder="{{ cms_schedule.film_director }}" {{ edit_status }}><br>
+                                        <br>
+                                    </div>
+
+                                    <!-- Year -->
+                                    <div style="margin-right: 30px">
+                                        <label for="film_year{{- loop.index -}}">Year</label><br>
+                                        <input name="film_year{{- loop.index -}}" id="film_year{{- loop.index -}}" 
+                                            type="number" min="1" max="100000" 
+                                            placeholder="{{ cms_schedule.film_year }}" {{ edit_status }}><br>
+                                        <br>
+                                    </div>
+
+                                    <!-- Runtime -->
+                                    <div style="margin-right: 30px">
+                                        <label for="film_runtime{{- loop.index -}}">Runtime</label><br>
+                                        <input name="film_runtime{{- loop.index -}}" id="film_runtime{{- loop.index -}}" 
+                                            type="number" min="1" max="100000" type="number"
+                                            placeholder="{{ cms_schedule.film_runtime }}" {{ edit_status }}><br>
+                                        <br>
+                                    </div>
+                                </div>
+
+                                <!-- Description -->
+                                <label for="film_description{{- loop.index -}}">Description</label><br>
+                                <textarea name="film_description{{- loop.index -}}" id="film_description{{- loop.index -}}"
+                                    rows="5" cols="90" 
+                                    placeholder="{{ cms_schedule.film_description }}" {{ edit_status }}></textarea><br>
+                                <br>
+
+                                <!-- Wiki -->
+                                <label for="wiki">Wiki <i>(Optional)</i></label><br>
+                                <input name="wiki{{- loop.index -}}" id="wiki{{- loop.index -}}" size="90px" 
+                                    placeholder="{{ cms_schedule.wiki }}" {{ edit_status }}><br>
+                                <br>
+
+                                <!-- Special Notes -->
+                                <label>Special Notes <i>(Optional)</i></label><br>
+                                <textarea name="notes{{- loop.index -}}" id="notes{{- loop.index -}}" 
+                                    rows="5" cols="90" 
+                                    placeholder="{{ cms_schedule.notes }}" {{ edit_status }}></textarea><br>
+                                <br>
+
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                {% endfor %}
+
+            {%- else -%}
+                <div id="films">
+                    <div id="film1" class="film">
+
+                        <table>
+                            <tbody>
+                                <tr id="schedule">
+                                    <td style="padding: 20px 22px 0px 22px; vertical-align:top">
+                                        <input class="cms-bottom-container-child-section-body-index" id="film_count1"
+                                            placeholder="F" {{ edit_status }}>
+                                    </td>
+                                    <td>
+                                        <br>
+                                        <label for="date1">Date</label><br>
+                                        <input name="date1" id="date1" type="date"><br>
+                                        <br>
+
+                                        <div style="display: flex;">
+                                            <div style="padding-right: 35px">
+                                                <label for="imdb1">IMDB ID</label><br>
+                                                <input name="imdb1" id="imdb1"><br>
+                                            </div>
+                                            <div style="display: flex; justify-content: right; align-items: end;">
+                                                <!-- 
+                                                <button class="cms-btn-imdb cms-btn cms-btn-primary" type="submit">
+                                                    Autofill
+                                                </button>
+                                                -->
+                                            </div>
+                                        </div>
+                                        <br>
+
+                                        <label for="film_title1">Title</label><br>
+                                        <input name="film_title1" id="film_title1" size="80px"><br>
+                                        <br>
+
+                                        <div style="display: flex;">
+                                            <div style="margin-right: 30px">
+                                                <label>Director</label><br>
+                                                <input name="director1" id="director1" size="55px"><br>
+                                                <br>
+                                            </div>
+
+                                            <div style="margin-right: 30px">
+                                                <label>Year</label><br>
+                                                <input name="film_year1" id="film_year1" min="1" max="100000"
+                                                    type="number"><br>
+                                                <br>
+                                            </div>
+
+                                            <div style="margin-right: 30px">
+                                                <label>Runtime</label><br>
+                                                <input name="film_runtime1" id="film_runtime1" min="1" max="100000"
+                                                    type="number"><br>
+                                                <br>
+                                            </div>
+                                        </div>
+
+                                        <label>Description</label><br>
+                                        <textarea rows="5" cols="79" name="desciption1" id="description1"
+                                            form="new"></textarea><br>
+                                        <br>
+
+                                        <label>Wiki <i>(Optional)</i></label><br>
+                                        <input name="wiki1" id="wiki1" size="80px"><br>
+                                        <br>
+
+                                        <label>Special Note <i>(Optional)</i></label><br>
+                                        <textarea rows="5" cols="79" name="note1" id="note1" form="new"></textarea><br>
+                                        <br>
+
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                    </div>
+                </div>
+            {%- endif -%}
+
+        </div>
+
+        <!-- Do not delete add-film class -->
+        <button class="cms-btn cms-btn-medium cms-btn-create add-film" name="id" type="button" {{ edit_status }}>
+            ADD FILM
+        </button>
+
+
+        <!-- Clone films div -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+        <script>
+            $(function () {
+                var template = $('#films .film:first').clone();
+                var filmsCount = 1;
+                window.addFilm = function () {
+                    filmsCount++;
+                    var film = template.clone().find(':input').each(function () {
+                        var newId = this.id.substring(0, this.id.length - 1) + filmsCount;
+
+                        $(this).prev().prev().attr('for', newId); // update label for
+                        this.name = this.id = newId; // update id and name (assume the same)
+
+                    }).end()
+                        .attr('id', 'film' + filmsCount)
+                        .appendTo('#films');
+                }
+                $('.add-film').click(addFilm);
+            });
+        </script>
+
+    </div>
+
+    <div class="cms-content-middle-body-general">
+        <!-- Colors -->
+
+        <!-- Colors - Section - Heading -->
+        <div class="cms-bottom-container-child-section-heading">
+            Website Theme
+        </div>
+        <!-- Colors - Section - Body -->
+        <div class="cms-bottom-container-child-section-body">
+
+            <div style="padding: 0px 0px 30px 0px; display: flex; justify-content: center;">
+                <div style="margin-right: 30px">
+                    <br>
+                    <label for="color1">Color #1</label><br>
+                    <input class="colorpicker1" name="color1" id="color1" 
+                        placeholder="{{ cms_series.color1 }}" {{ edit_status }} 
+                        onkeyup="changeColor1(this.className)">
+                </div>
+
+                <div style="margin-right: 30px">
+                    <br>
+                    <label for="color2">Color #2</label><br>
+                    <input class="colorpicker2" name="color2" id="color2" 
+                        placeholder="{{ cms_series.color2 }}" {{ edit_status }} 
+                        onkeyup="changeColor2(this.className)">
+                </div>
+
+                <div style="margin-right: 30px">
+                    <br>
+                    <label for="color3">Color #3</label><br>
+                    <input class="colorpicker3" name="color3" id="color3" 
+                        placeholder="{{ cms_series.color3 }}" {{ edit_status }} 
+                        onkeyup="changeColor3(this.className)">
+                </div>
+            </div>
+
+            <div class="cms-bottom-container-child-section-body-minisite-parent">
+                <div class="cms-bottom-container-child-section-body-minisite-child" 
+                    style="font-family: Verdana, Arial, Helvetica, sans-serif;">
+
+                    <!-- Mini Top -->
+                    <div class="mini-top1 mini-top2 cms-bottom-container-child-section-body-minisite-child-top" 
+                        style="color: {{ cms_series.color2 }}; background-color: {{ cms_series.color1 }};">
+                        {{- cms_series.series_semester -}}{{- cms_series.series_year -}}<span 
+                        class="mini-top3" style="color: {{ cms_series.color3 }}">LANDSCAPE<br>ARCHITECTURE</span>FILMSERIES
+                    </div>
+
+                    <!-- Mini Middle -->
+                    <div class="mini-midleft1" style="display: flex;">
+                        <!-- Mini Middle - Left -->
+                        <div style="background-color: {{ cms_series.color1 }};">
+                            <div style="width: 198px; height: 120px;">
+                                &nbsp;
+                            </div>
+                        </div>
+                        <!-- Mini Middle - Right -->
+                        <div class="mini-midright2 cms-bottom-container-child-section-body-minisite-child-right" 
+                            style="background-color: {{ cms_series.color2 }};">
+                            <div>
+                                <span class="mini-midright1" style="color: {{ cms_series.color1 }};">{{ cms_series.series_title | safe }}</span> 
+                                <span class="mini-midright2-subtitle" style="color: {{ cms_series.color3 }};">{{ cms_series.series_brief | safe }} <span 
+                                    style="text-decoration: underline;">POSTER</span> 
+                            
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Mini Bottom-->
+                    <div class="mini-bottom1" 
+                        style="height: 190px; background-color: {{ cms_series.color1 }}; transition: background-color 0.5s ease;">
+
+                            &nbsp;
+
+                    </div>
+
+                    <script>
+                        function changeColor1(className) {
+                            document.getElementsByClassName("mini-top1")[0].style.background = document.getElementsByClassName(className)[0].value;
+                            document.getElementsByClassName("mini-midleft1")[0].style.background = document.getElementsByClassName(className)[0].value;
+                            document.getElementsByClassName("mini-midright1")[0].style.color = document.getElementsByClassName(className)[0].value;
+                            document.getElementsByClassName("mini-bottom1")[0].style.background = document.getElementsByClassName(className)[0].value;
+                        }
+                        function changeColor2(className) {
+                            document.getElementsByClassName("mini-top2")[0].style.color = document.getElementsByClassName(className)[0].value;
+                            document.getElementsByClassName("mini-midright2")[0].style.background = document.getElementsByClassName(className)[0].value;
+                        }
+                        function changeColor3(className) {
+                            document.getElementsByClassName("mini-top3")[0].style.color = document.getElementsByClassName(className)[0].value;
+                            document.getElementsByClassName("mini-midright2-subtitle")[0].style.color = document.getElementsByClassName(className)[0].value;
+                        }
+                    </script>
+
+                </div>
+            </div>
+
+        </div>
+    
+    </div>
+
+    <!-- Save Buttons -->
+    <div style="padding-left: 30px;">
+        <button class="cms-btn cms-btn-large cms-btn-create" type="submit" {{ edit_status }}>
+            SAVE
+        </button>
+    </div>
+
+</form>
+<!-- End Form -->
+
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+
+<div class="cms-content-middle-body-general">
+    <!-- Colors -->
+
+    <!-- Colors - Section - Heading -->
+    <div class="cms-bottom-container-child-section-heading">
+        <span style="color: red;">Danger Zone</a>
+    </div>
+    <!-- Colors - Section - Body -->
+    <div class="cms-bottom-container-child-section-body">
+
+        <br>
+
+        <div class="cms-danger-item">
+            <div style="padding-right: 50px;">
+                <b>Publish series</b><br>
+                This will make the series visible on the website.
+            </div>
+            <div>
+                {%- set danger_status = "" -%}
+                {%- if cms_series.series_display == "Yes" %}
+                    {%- set danger_status = "disabled" %}
+                {%- endif %}              
+                <button class="cms-btn-danger" type="button" {{ danger_status }}>
+                    Publish series
+                </button>
+            </div>
+        </div>
+
+        <br>
+
+        <div class="cms-danger-item">
+            <div style="padding-right: 50px;">
+                <b>Unpublish series</b><br>
+                This will remove the series from the website. Unpublished series can be deleted.
+            </div>
+            <div>
+                {%- set danger_status = "" -%}
+                {%- if cms_series.series_display == "No" %}
+                    {%- set danger_status = "disabled" %}
+                {%- endif %}
+                <form action="/cms/unpublish" method="post">
+                    <input type="hidden" name="unpublish" class="hidden-field" value="{{ cms_series.series_id }}">
+                    <button class="cms-btn-danger" type="submit" {{ danger_status }}>
+                        Unpublish series
+                    </button>
+                </form>
+            </div>
+        </div>
+
+        <br>
+
+        <div class="cms-danger-item">
+            <div style="padding-right: 50px;">
+                <b>Delete series</b><br>
+                This will delete an unpublished series and its schedules. It will also delete film records not 
+                associated with any other series. There is no going back. Please be certain.
+            </div>
+            <div>
+                {%- set danger_status = "" -%}
+                {%- if cms_series.series_display == "Yes" %}
+                    {%- set danger_status = "disabled" %}
+                {%- endif %} 
+                <form action="/cms/delete" method="post">
+                    <button class="cms-btn-danger" type="button" {{ danger_status }}>
+                        Delete series
+                    </button>
+                </form>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+
+{%- endfilter -%}
+
+{% endblock %}

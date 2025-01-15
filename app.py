@@ -6,8 +6,9 @@ from flask import Flask
 from flask_session import Session
 
 # Local Libraries
-from blueprints.main import main
-from blueprints.cms import cms
+from blueprints.main.routes import main_bp
+from blueprints.cms.routes import cms_bp
+
 
 
 
@@ -30,5 +31,5 @@ app.config["SESSION_TYPE"] = "filesystem"
 Session(app)
 
 # Register blueprints for main and cms routes
-app.register_blueprint(main)
-app.register_blueprint(cms)
+app.register_blueprint(main_bp)
+app.register_blueprint(cms_bp)

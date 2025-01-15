@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="description" content="Archive for the website of the Landscape Architecture Film Series @ UIUC (2002-1010)"/>
+    <meta name="viewport" content="initial-scale=1, width=device-width">
+
+    <!-- https://favicon.io/emoji-favicons/money-bag/ -->
+    <link href="{{ url_for('cms_bp.static', filename='favicon.ico') }}" rel="icon">
+    
+    <link href="{{ url_for('cms_bp.static', filename='styles.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+    
+    {%- block map %}{% endblock %}
+
+    <title>
+        LAFSCMS
+    </title>
+</head>
+
+<body class="cms-body">
+
+    <div class="cms-main">
+
+        <div class="cms-main-left">
+
+            <div class="cms-main-left-container">
+
+                <div class="cms-main-left-top">
+                    <div class="cms-main-left-title">
+                        LAFSCMS
+                    </div>
+                     <div class="cms-main-left-item">
+                        <div class="cms-main-left-item-left {% if sidebar == 'index'%}cms-main-left-item-left-active{% else %}{% endif %}">
+                        </div>
+                        <div class="cms-main-left-item-right  {% if sidebar == 'index'%}cms-main-left-item-right-active{% else %}{% endif %}">
+                            <span class="cms-icon material-symbols-outlined">
+                                dashboard
+                            </span>
+                            <a href="/cms">Dashboard</a>
+                        </div>
+                    </div>
+                   <div class="cms-main-left-item">
+                        <div class="cms-main-left-item-left {% if sidebar == 'series'%}cms-main-left-item-left-active{% else %}{% endif %}">
+                        </div>
+                        <div class="cms-main-left-item-right  {% if sidebar == 'series'%}cms-main-left-item-right-active{% else %}{% endif %}">
+                            <span class="cms-icon material-symbols-outlined">
+                                event_note
+                            </span>
+                            <a href="/cms/series">Series</a>
+                        </div>
+                    </div>
+                    <div class="cms-main-left-item">
+                        <div class="cms-main-left-item-left {% if sidebar == 'films'%}cms-main-left-item-left-active{% else %}{% endif %}">
+                        </div>
+                        <div class="cms-main-left-item-right {% if sidebar == 'films'%}cms-main-left-item-right-active{% else %}{% endif %}">
+                            <span class="cms-icon material-symbols-outlined">
+                                theaters
+                            </span>
+                            <a href="/cms/films">Films</a>
+                        </div>
+                    </div>
+                    <div class="cms-main-left-item">
+                        <div class="cms-main-left-item-left {% if sidebar == 'org'%}cms-main-left-item-left-active{% else %}{% endif %}">
+                        </div>
+                        <div class="cms-main-left-item-right {% if sidebar == 'org'%}cms-main-left-item-right-active{% else %}{% endif %}">
+                            <span class="cms-icon material-symbols-outlined">
+                                groups
+                            </span>
+                            <a href="/cms/org">Org</a>
+                        </div>
+                    </div>
+                    <div class="cms-main-left-item">
+                        <div class="cms-main-left-item-left {% if sidebar == 'media'%}cms-main-left-item-left-active{% else %}{% endif %}">
+                        </div>
+                        <div class="cms-main-left-item-right {% if sidebar == 'media'%}cms-main-left-item-right-active{% else %}{% endif %}">
+                            <span class="cms-icon material-symbols-outlined">
+                                image
+                            </span>
+                            <a href="/cms/media">Media</a>
+                        </div>
+                    </div>
+                    <div class="cms-main-left-item">
+                        <div class="cms-main-left-item-left {% if sidebar == 'documentation'%}cms-main-left-item-left-active{% else %}{% endif %}">
+                        </div>
+                        <div class="cms-main-left-item-right {% if sidebar == 'documentation'%}cms-main-left-item-right-active{% else %}{% endif %}">
+                            <span class="cms-icon material-symbols-outlined">
+                                description
+                            </span>
+                            Documentation
+                        </div>
+                    </div>
+                    <div class="cms-main-left-item">
+                        <div class="cms-main-left-item-left">
+                        </div>
+                        <div class="cms-main-left-item-right">
+                            <span class="cms-icon material-symbols-outlined">
+                                arrow_back
+                            </span>
+                            <a href="/">Website</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="cms-main-left-bottom">
+                    <div class="cms-main-left-item">
+                        <div class="cms-main-left-item-left">
+                        </div>
+                        <div class="cms-main-left-item-right">
+                            <span class="cms-icon material-symbols-outlined">
+                                logout
+                            </span>
+                            Logout
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            
+        </div>
+
+        <div class="cms-main-right-main">
+
+            <div class="cms-main-right-main-navbar">
+                <div class="cms-main-right-main-navbar-left">
+                    <div class="cms-main-right-main-navbar-left-headline">
+                    </div>
+                    <div class="cms-main-right-main-navbar-left-headline">
+                    </div>
+                </div>
+                <div class="cms-main-right-main-navbar-right">
+                    Marty McFly
+                    <span class="cms-icon material-symbols-outlined" style="padding: 0 0 0 10px !important;">
+                        account_circle
+                    </span>
+                </div>
+            </div>
+
+            <div class="cms-main-right-main-body">
+
+                <div class="cms-content">
+                    <div class="cms-content-left">
+                    </div>
+                    <div class="cms-content-middle">
+                        {%- block cmscontent %}{% endblock %}
+                    </div>
+                    <div class="cms-content-right">
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+
+    </div>
+
+
+</body>
+
+</html>

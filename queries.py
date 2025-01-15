@@ -67,11 +67,16 @@ def get_info_series(db: str, series_id: int) -> Dict[str, Any]:
     cursor.execute(query, (series_id,))
     results = cursor.fetchone()
 
+    # Construct the full URL for the series poster
+    results = dict(results)
+    if results['series_poster_url']:
+        results['series_poster_url'] = f"{{ url_for('main_bp.static', filename=f'images/{results['series_poster_url']}')  }}"
+
     # Close cursor and connection
     cursor.close()
     connection.close()
 
-    return dict(results)
+    return results
 
 
 def get_info_schedules(db: str, series_id: int) -> List[Dict[str, Any]]:

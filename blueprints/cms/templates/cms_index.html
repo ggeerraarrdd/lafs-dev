@@ -1,0 +1,128 @@
+{% extends "cms_layout.html" %}
+
+{% block cmscontent %}
+
+<div class="cms-dashboard">
+
+    <div class="cms-content-middle-head">
+        <div class="cms-content-middle-head-left">
+            <a href="/cms">LAFSCMS</a> 
+            <span style="padding-left: 10px; padding-right: 10px; color: #6C757D">/</span> 
+            <span style="color: #6C757D;">Dashboard</span>
+        </div>
+        <div class="cms-content-middle-head-right">
+        </div>
+    </div>
+
+    <div class="cms-dashboard-top">
+        <div class="cms-dashboard-top-item">
+            <div class="cms-dashboard-top-item-title">
+                Current Series
+            </div>
+            <img src="{{ current_series.series_poster_url }}" width="175px">
+        </div>
+        <div class="cms-dashboard-top-item">
+            
+            <div class="cms-dashboard-top-item-title">
+                Next Film
+            </div>
+            <span style="padding-top: 20px; text-transform: uppercase; font-size: 12px">
+                <a href="{{ next.wiki}}" target="_blank" rel="noopener noreferrer">{{ next.film_title }}</a><br>
+                <br>
+                (dir. {{ next.film_director }}, {{ next.film_year }}, {{ next.film_runtime }} mins)
+            </span>
+
+            <br><br><br><br><br>
+
+            <div class="cms-dashboard-top-item-title">
+                Special Note
+            </div>
+            <span style="padding-top: 20px; text-transform: uppercase; font-size: 12px">
+                {{ next.notes }}
+            </span>
+
+
+        </div>
+        <div class="cms-dashboard-top-item">
+            <div class="cms-dashboard-top-item-title">
+                Quick Links
+            </div>
+            <span style="padding-top: 20px; text-transform: uppercase; font-size: 12px">
+                
+                <a href="/cms/create">Create New Series</a><br><br><br>
+
+                Update Current Series:<br>
+                <a href="/cms/view?id={{ current_series.series_id }}">{{ current_series.series_title }}</a><br><br><br>
+
+                Edit Draft Series:<br>
+                {% for series in serieses %}
+                {% set count = 0 %}
+                    {% if series.series_display == "No" %}
+                        {% set count = count + 1 %}
+                        <a href="/cms/view?id={{ series.series_id }}">{{ series.series_title }}</a><br>
+                    {% else %}
+                    {% endif %}
+                {% endfor %}
+
+                {% if count == 0 %}
+                    None
+                {% else %}
+                {% endif %}
+
+                <br><br>
+
+                <a href="/cms/register">Register New User</a><br><br><br>
+
+            </span>
+        </div>
+    </div>
+    
+    <div class="cms-dashboard-bottom">
+
+        <table style="border-collapse: collapse; width: 100%;">
+            <thead>
+                <tr style="border-bottom: 1px solid #ADB5BD; text-align: left;">
+                    <th class="text-start">Date</th>
+                    <th class="text-start" style="min-width:350px;">Title</th>
+                    <th class="text-start">Director</th>
+                    <th class="text-start">Year</th>
+                    <th class="text-start">Runtime</th>
+                    <th class="text-start">IMDB ID</th>
+                    <th class="text-start">Wiki</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                <div class="cms-dashboard-bottom-title">
+                Current Schedule
+                </div> 
+
+                {%- for film in films %}
+                <tr style="border-bottom: 1px solid #EFEFEF;">
+                    <td class="text-start">{{ film.month[:3] }} {{ film.day }}</td>
+                    <td class="text-start">{{ film.film_title }}</td>
+                    <td class="text-start">{{ film.film_director }}</td>
+                    <td class="text-start">{{ film.film_year }}</td>
+                    <td class="text-start">{{ film.film_runtime }}</td>
+                    <td class="text-start"><a href="https://www.imdb.com/title/{{- film.id -}}/" target="_blank">{{ film.id }}</a></td>
+                    <td class="text-start"><a href="{{ film.wiki }}" target="_blank" rel="noopener noreferrer">wiki</a></td>
+                </tr>
+                {% endfor %}
+            </tbody>
+
+            <tfoot>
+                <tr>
+                    <td class="border-0" colspan="10">
+                        &nbsp;
+                    </td>
+                </tr>
+            </tfoot>
+        </table>
+
+    </div>
+
+    <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+
+</div>
+
+{% endblock %}

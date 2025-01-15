@@ -1,0 +1,91 @@
+{% extends "cms_layout.html" %}
+
+{% block cmscontent %}
+
+{%- filter indent(width=8) -%}
+
+<div class="cms-content-middle-head">
+    <div class="cms-content-middle-head-left">
+        <a href="/cms">LAFSCMS</a> 
+        <span style="padding-left: 10px; padding-right: 10px;">/</span> 
+        <a href="/cms/org">Org</a> 
+        <span style="padding-left: 10px; padding-right: 10px;">/</span> 
+        <span style="color: #6C757D;">Register New User</span> 
+    </div>
+    <div class="cms-content-middle-head-right">
+    </div>
+</div>
+
+<!-- Bottom Container - csm create -->
+
+<form name="new" id="new" action="/cms/register" method="post">
+
+    <!-- Create New Series -->
+    <div class="cms-content-middle-body-general">
+
+        <!-- Create New Series - Section - Heading -->
+        <div class="cms-bottom-container-child-section-heading">
+            Register New User
+        </div>
+        <!-- Create New Series - Section - Body -->
+        <div class="cms-bottom-container-child-section-body">
+
+            <br>
+
+            <div style="display: flex; flex-direction: column;">
+                <div style="margin-right: 30px">
+                    <label for="new_name_first">First Name</label><br>
+                    <input name="new_name_first" id="new_name_first" size="40%" required><br>
+                    <br>
+                </div>
+                <div style="margin-right: 30px">
+                    <label for="new_name_last">Last Name</label><br>
+                    <input name="new_name_last" id="new_name_last" size="40%" required><br>
+                    <br>
+                </div>
+                <div style="margin-right: 30px">
+                    <label for="new_username">Username</label><br>
+                    <input name="new_username" id="new_username" size="40%" required><br>
+                    <br>
+                </div>
+                <div style="margin-right: 30px">
+                    <label for="new_password">Temporary Password</label><br>
+                    <input name="new_password" id="new_password" size="40%" required><br>
+                    <br>
+                </div>
+                <div style="margin-right: 30px">
+                    <label for="new_password_again">Temporary Password (again)</label><br>
+                    <input name="new_password_again" id="new_password" size="40%" required><br>
+                    <br>
+                </div>
+                <div style="margin-right: 30px">
+                    <label for="new_role">Role</label><br>
+                    <select name="new_role" style="width: 200px; height: 30px;" required>
+                        <option value=""></option>
+                        <option value="admin">Admin</option>
+                        <option value="curator">Curator</option>
+                    </select><br>
+                </div>
+            </div>
+
+        </div>
+    </div>
+     <!-- Create New Series - End -->
+
+    <!-- Save Buttons -->
+    <div style="padding-left: 30px;">
+        <button class="cms-btn cms-btn-large cms-btn-create" type="submit">
+            SAVE
+        </button>
+    </div>
+    
+</form>
+<!-- End Form -->
+
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+
+<!-- End of Bottom Container - Parent -->
+
+{%- endfilter -%}
+
+{% endblock %}

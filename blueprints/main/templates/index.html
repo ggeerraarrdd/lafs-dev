@@ -1,0 +1,19 @@
+{% extends "layout.html" %}
+
+{% block title %}{{ series.semester }} — {{ series.series_title }}{% endblock %}
+
+{%- block main %}
+    {%- filter indent(width=8) %}
+        <div class="middle-container-right-index middle-container-right-index-screen">
+
+            <span style="color: {{ series.color1 }};">{{ series.series_title.upper() }} 
+            <span style="color: {{ series.color3 }};">
+                {{ series.series_brief.upper() }} 
+                {%- if series.series_poster_url %}
+                <a href="{{ url_for('main_bp.static', filename='images/1_poster_anxiousterrains.jpg') }}" style="color: {{ series.color3 }};" target="_blank" rel="noopener noreferrer">POSTER</a>
+                {%- endif %}
+            </span>
+
+        </div>
+    {%- endfilter %}
+{% endblock %}

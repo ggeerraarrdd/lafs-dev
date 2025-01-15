@@ -1,0 +1,48 @@
+{% extends "cms_layout.html" %}
+
+{% block cmscontent %}
+
+<div class="cms-content-middle-head">
+    <div class="cms-content-middle-head-left">
+        <a href="/cms">LAFSCMS</a>  
+        <span style="padding-left: 10px; padding-right: 10px; color: #6C757D">/</span>  
+        <span style="color: #6C757D;">Films</span> 
+    </div>
+    <div class="cms-content-middle-head-right">
+    </div>
+</div>
+
+<div class="cms-content-middle-body-general">
+
+    <table>
+        <thead>
+            <tr style="border-bottom: 1px solid #ADB5BD;">
+                <th class="text-start" style="width: 25px; white-space: nowrap;">Series</th>
+                <th class="text-start">Title</th>
+                <th class="text-start">Director</th>
+                <th class="text-start" style="width: 50px; white-space: nowrap;">Year</th>
+                <th class="text-start" style="width: 50px; white-space: nowrap;">Runtime</th>
+                <th class="text-start" style="width: 50px; white-space: nowrap;">IMDB ID</th>
+                <th class="text-start" style="width: 50px; white-space: nowrap;">Wiki</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            {%- for film in films %}
+            <tr style="border-bottom: 1px solid #EFEFEF;">
+                <td class="text-start"><a href="{{ url_for('cms', id=film.series) }}">{{ film.series }}</a></td>
+                <td class="text-start" style="text-overflow: clip;">{{ film.film_title }}</td>
+                <td class="text-start">{{ film.film_director }}</td>
+                <td class="text-start">{{ film.film_year }}</td>
+                <td class="text-start">{{ film.film_runtime }}</td>
+                <td class="text-start"><a href="https://www.imdb.com/title/{{- film.id -}}/" target="_blank">{{ film.id }}</a></td>
+                <td class="text-start"><a href="{{ film.wiki }}" target="_blank" rel="noopener noreferrer">wiki</a></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+
+    </table>
+
+</div>
+
+{% endblock %}

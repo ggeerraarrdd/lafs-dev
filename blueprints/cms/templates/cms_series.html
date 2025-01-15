@@ -1,0 +1,98 @@
+{% extends "cms_layout.html" %}
+
+{% block cmscontent %}
+
+<div class="cms-content-middle-head">
+    <div class="cms-content-middle-head-left">
+        <a href="/cms">LAFSCMS</a> 
+        <span style="padding-left: 10px; padding-right: 10px; color: #6C757D;">/</span> 
+        <span style="color: #6C757D;">Film Series</span>
+    </div>
+    <div class="cms-content-middle-head-right" style="padding-right: 50px;">
+        <form action="/cms/create" method="get">
+            <button class="cms-btn cms-btn-medium cms-btn-create" name="id" type="submit" value="new">
+                CREATE SERIES
+            </button>
+        </form>
+    </div>
+</div>
+
+<div class="cms-content-middle-body-general">
+
+    <table>
+        <thead>
+            <tr style="border-bottom: 1px solid #ADB5BD;">
+                <th class="text-start">Series</th>
+                <th class="text-start">Semester</th>
+                <th class="text-start">Title</th>
+                <th class="text-start">Poster</th>
+                <th class="text-start">Start</th>
+                <th class="text-start">End</th>
+                <th class="text-start">Status</th>
+                <th class="text-start">Visible</th>
+                <th class="text-center">View/Edit</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            {%- for series in serieses %}
+            <tr style="border-bottom: 1px solid #EFEFEF;">
+                <td class="text-start">{{ series.series_id }}</td>
+                <td class="text-start">{{ series.series_semester[:2].upper() }} {{ series.series_year }}</td>
+                <td class="text-start">{{ series.series_title }}</td>
+                <td class="text-start">
+                    {%- if series.series_poster_url -%}
+                    <a href="/{{ series.series_poster_url }}" target="_blank">view</a>
+                    {%- else -%}
+                    —
+                    {%- endif -%}
+                </td>
+                <td class="text-start">
+                    {%- if series.min_date -%}
+                    {{ series.min_date }}
+                    {%- else -%}
+                    —
+                    {%- endif -%}
+                </td>
+                <td class="text-start">
+                    {%- if series.max_date -%}
+                    {{ series.max_date }}
+                    {%- else -%}
+                    —
+                    {%- endif -%}
+                </td>
+                <td class="text-start">
+                    {%- if series.status == 1 -%}
+                    Completed
+                    {%- elif series.status == 0 and series.series_display == "Yes" -%}
+                    Ongoing
+                    {%- else -%}
+                    Draft
+                    {%- endif -%}
+                </td>
+                <td class="text-start">{{ series.series_display }}</td>
+                <td class="text-center">
+                    <form action="/cms/view" method="get">
+                        {%- if series.status == 1 -%}
+                        <button class="cms-btn cms-btn-small" name="id" type="submit" value="{{ series.series_id }}">
+                        View Only
+                        </button>
+                        {%- else -%}
+                        <button class="cms-btn cms-btn-small cms-btn-update" name="id" type="submit" value="{{ series.series_id }}">
+                        View or Edit
+                        </button>
+                        {%- endif %}                        
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+
+    </table>
+
+</div>
+
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+
+{% endblock %}

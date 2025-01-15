@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="description" content="Archive for the website of the Landscape Architecture Film Series @ UIUC (2002-1010)"/>
+    <meta name="viewport" content="initial-scale=1, width=device-width">
+    <link href="{{ url_for('main_bp.static', filename='favicon.ico') }}" rel="icon">
+    <link href="{{ url_for('main_bp.static', filename='styles.css') }}" rel="stylesheet">
+    {%- block location %}{% endblock %}
+    <title>
+        Landscape Architecture Film Series @ UIUC — {% block title %}{% endblock %}
+    </title>
+</head>
+
+<body class="body-screen">
+
+    <!-- Main Container -->
+    <div class="main-container main-container-screen" bgcolor="{{ series.color1 }}">
+
+        <!-- Top Container -->
+        <div class="top-container top-container-screen" style="background-color: {{ series.color1 }}; color: {{ series.color2 }};">
+
+            <!-- Top Container - Title -->
+            <div class="top-container-title top-container-title-screen">
+                {{ series.semester.upper() }}<span style="color: {{ series.color3 }};">LANDSCAPE<br>ARCHITECTURE</span>FILMSERIES
+            </div>
+
+            <!-- Top Container - Byline -->
+            <div class="top-container-byline top-container-byline-screen">
+                Organized by the <a href="/org" style="color: {{ series.color3 }};">O</a>RG for the
+                <a href="https://landarch.illinois.edu/" target="_blank" style="color: {{ series.color3 }};">D</a>epartment of 
+                Landscape Architecture, <a href="https://faa.illinois.edu/" target="_blank" style="color: {{ series.color3 }};">C</a>ollege 
+                of Fine and Applied Arts, <a href="https://illinois.edu/" target="_blank" style="color: {{ series.color3 }};">U</a>niversity 
+                of Illinois Urbana/Champaign<br>
+                <br>
+                <a href="https://github.com/ggeerraarrdd/film-series" target="_blank" style="color: {{ series.color3 }};">Notes  
+                From the Future</a>
+            </div>
+
+            <!-- Top Container - Location -->
+            <div class="top-container-location top-container-location-screen">
+                <a href="/location" style="color: {{ series.color3 }};">P</a>LYM AUDITORIUM<br>
+                134 TEMPLE BUELL HALL<br>
+                WEDNESDAYS @ 7:30pm<br>
+                FREE ADMISSION<br>
+            </div>
+
+            <!-- Top Container - Links to all past and current series -->
+            <div class="top-container-serieses top-container-serieses-screen">
+                {% for series_id in series_ids %}
+                {% if series_id.series_display == "Yes" %}
+                <form action="/series" method="post">
+                    <input type="hidden" name="series-id" class="hidden-field" value="{{ series_id.series_id }}">
+                    <button class="button-series button-series-screen text-left" name="button-series" type="submit">
+                        <span style="text-decoration: underline; color: {{ series.color3 }};">
+                            {{ series_id.series_semester.0 -}}
+                        </span><span style="text-decoration: none; color: {{ series.color2 }};">
+                            {{- series_id.series_semester[1:].upper() }} {{ series_id.series_year }}
+                        </span>
+                    </button>
+                </form>
+                {% endif %}
+                {% endfor %}
+            </div>
+
+        </div>
+
+
+
+
+
+        <!-- Middle Container -->
+        <div class="middle-container middle-container-screen">
+
+            <!-- Middle Container - Left -->
+            <div class="middle-container-left middle-container-left-screen" style="background-color: {{ series.color1 }};">
+            </div>
+
+            <!-- Middle Container - Right -->
+            <div class="middle-container-right middle-container-right-screen" style="background-color: {{ series.color2 }}; color: {{ series.color1 }};">
+            {% block main %}{% endblock %}
+            </div>
+
+        </div>
+
+
+
+
+
+        <!-- Bottom Container -->
+        <div class="bottom-container bottom-container-screen" style="background-color: {{ series.color1 }};">
+
+            <!-- List of films and their scheduled showtimes for selected series -->
+            {% for schedule in schedules %}
+
+            <div class="bottom-container-film bottom-container-film-screen">
+            <table>
+                <tr>
+                    <td valign="top">
+                        <span style="color: {{ series.color2 }};">+</span>
+                    </td>
+                    <td valign="top" style="max-width: 375px;">
+                        <!-- Date -->
+                        <span style="color: {{ series.color2 }};">
+                            {{ schedule.day }}.{{ schedule.month.lower() }}<br>
+                        </span>
+                        <!-- Film Title -->
+                        <form action="/film" method="post">
+                            <input type="hidden" name="series-id" class="hidden-field"
+                                value="{{ series.series_id }}">
+                            <input type="hidden" name="film-id" class="hidden-field" value="{{ schedule.id }}">
+                            <button class="button-title text-left" name="button-title" type="submit">
+                                <span style="color: {{ series.color3 }};">
+                                    <span style="text-decoration: underline;">
+                                        {{ schedule.film_title.upper() }}
+                                    </span>
+                                </span>
+                            </button>
+                        </form>
+
+                        <!-- Film Info -->
+                        <span style="font-size: 11px; color: {{ series.color2 }};">
+                            (dir. {{ schedule.film_director }},
+                            {{ schedule.film_year }},
+                            {{ schedule.film_runtime }}min)<br>
+                        </span>
+                        {%- if schedule.notes %}
+                        <div class="bottom-container-film-notes" 
+                            style="border-left: 1px solid {{ series.color3 }}; color: {{ series.color3 }};">
+                                <br>
+                                {{ schedule.notes }}
+                        </div>
+                        {%- else %}
+                        {%- endif %}
+                        <br>
+                    </td>
+                </tr>
+            </table>
+            </div>
+
+            {% endfor %}
+
+        </div>
+
+        <!-- Strip Container -->
+        <div class="strip-container strip-container-screen" style="background-color: {{ series.color2 }};">
+
+            <div class="strip-container-gif-screen" style="background-image: url(); background-color: {{ series.color1 }};">
+
+            </div>
+
+        <div>
+
+
+        <!-- Google tag (gtag.js) -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-WKPLFXFD90"></script>
+        <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-WKPLFXFD90');
+        </script>
+
+
+    </div>
+
+</body>
+
+</html>

@@ -1,0 +1,25 @@
+{% extends "layout.html" %}
+
+{% block title %}{{ series.series_title }}{% endblock %}
+
+{% block main %}
+    {%- filter indent(width=8) %}
+        <div class="middle-container-right-org">
+
+            <span class="middle-container-right-org-title" style="color: {{ series.color3 }};">
+                ORG
+            </span><br>
+            <br>
+            Susan Baumgartner<br>
+            Gerard Bul-lalayao<br>
+            David Hays<br>
+            Chad Tyler<br>
+            <br>
+            Technology and web space provided by the <a
+                href="https://web.archive.org/web/20040921000254/http://www.rehearsal.uiuc.edu/" target="_blank" 
+                style="color: {{ series.color3 }};">Digital + Design Rehearsal Studio</a>.<br>
+            <br>
+            
+        </div>
+    {%- endfilter -%}
+{% endblock %}

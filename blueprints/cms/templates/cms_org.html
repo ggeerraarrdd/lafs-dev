@@ -1,0 +1,77 @@
+{% extends "cms_layout.html" %}
+
+{% block cmscontent %}
+
+<div class="cms-content-middle-head">
+    <div class="cms-content-middle-head-left">
+        <a href="/cms">LAFSCMS</a> 
+        <span style="padding-left: 10px; padding-right: 10px; color: #6C757D">/</span> 
+        <span style="color: #6C757D;">Org</span>  
+    </div>
+    <div class="cms-content-middle-head-right">
+        <div class="cms-content-middle-head-right" style="padding-right: 50px;">
+            <form action="/cms/register" method="get">
+                <button class="cms-btn cms-btn-medium cms-btn-create" name="id" type="submit" value="new">
+                    REGISTER USER
+                </button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class="cms-content-middle-body-general">
+
+    <table>
+        <thead>
+            <tr style="border-bottom: 1px solid #ADB5BD;">
+                <th class="text-start">Name</th>
+                <th class="text-start">Role</th>
+                <th class="text-start">Status</th>
+                <th class="text-start">Username</th>
+                <th class="text-start">Password</th>
+                <th class="text-start">Created</th>
+                <th class="text-start">Updated</th>
+                <th class="text-start">View/Edit</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            {%- for user in users %}
+            <tr style="border-bottom: 1px solid #EFEFEF;">
+                <td class="text-start">{{ user.name_first }} {{ user.name_last }}</td>
+                <td class="text-start">{{ user.role }}</td>
+                <td class="text-start">
+                    {%- if user.status == 1 -%}
+                    Active
+                    {%- else -%}
+                    —
+                    {%- endif -%}
+                <td class="text-start">{{ user.username }}</td>
+                <td class="text-start">●●●●●●●●</td>
+                <td class="text-start">{{ user.date_created[:10] }}</td>
+                <td class="text-start">
+                    {%- if user.date_updated -%}
+                    {{ user.date_updated[:10] }}
+                    {%- else -%}
+                    —
+                    {%- endif -%}
+                </td>
+                <td class="text-start">
+                    <form action="/cms/org" method="post">
+                        <input type="hidden" name="user-id" class="hidden-field" value="{{ user.user_id }}">
+                        <button class="cms-btn cms-btn-small cms-btn-update" name="user-id" type="submit">
+                            <span style="padding-left: 10px; padding-right: 10px;">Edit</span>
+                        </button>
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+
+    </table>
+
+</div>
+
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+
+{% endblock %}
