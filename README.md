@@ -41,30 +41,70 @@ ALL CONTENTS IN THIS REPO ARE FOR EDUCATIONAL PURPOSES ONLY.
 
 ### Dependencies
 
-* Flask==3.0.0
-* Werkzeug==3.0.1
+* See `requirements.txt`
+
+### Installation
+
+1. **Clone the repository:**
+
+    ```bash
+    git clone https://github.com/ggeerraarrdd/lafs-cms.git
+    ```
+
+2. **Navigate into the project directory:**
+
+    ```bash
+    cd lafs-cms # For example
+    ```
+
+3. **Create and activate a virtual environment:**
+
+    ```bash
+    python -m venv venv
+    source venv/bin/activate  # On Windows use `venv\Scripts\activate`
+    ```
+
+4. **Install the dependencies:**
+
+    ```bash
+    pip install -r requirements.txt
+    ```
+
+5. **Create an `.env` file and set the environment variables:**
+
+    Create a file named `.env` in the `app` directory of the project and add the following variables:
+
+    ```properties
+    SECRET_KEY=your_secret_key
+    MAP_API_KEY=your_map_api_key
+    DATABASE_NAME="lafs.db"
+    ```
+
+    Replace `your_secret_key` (see #6 below) and `your_map_api_key` (see # 7 below) with your actual secret key and API key.
+
+6. **Notes on Flask Secret Keys:**
+
+    TODO
+
+7. **Notes on Google Maps API Keys:**
+
+    TODO
 
 ### Usage
 
-Clone it!
+1. **Go into the app directory and run the command:**
 
-```bash
-git clone https://github.com/ggeerraarrdd/lafs-cms.git
-```
+    ```bash
+    flask run
+    ```
 
-Go into the project directory and run the command:
+2. **Open the film series website:**
 
-```bash
-flask run
-```
+    Copy and open the URL displayed after 'Running on' in the terminal.
 
-To open the film series website, copy the URL after 'Running on'.
+3. **Access the CMS:**
 
-To open the CMS, add `cms` at the end of the url.
-
-### Notes on Google Maps
-
-This is disabled.
+    Add `/cms` at the end of the URL.
 
 ## Author(s)
 
