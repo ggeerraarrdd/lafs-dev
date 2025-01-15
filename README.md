@@ -6,9 +6,9 @@ A bespoke CMS for the Landscape Architecture Film Series website
 
 _LAFSCMS_ is the companion content management system (CMS) for the _Landscape Architecture Film Series_ [website](https://l-a-f-s.org/). Currently in alpha, the plan is to merge the beta version with the [film series repo](https://github.com/ggeerraarrdd/film-series).
 
-Just like any real-world organization, student-run organizations such as a film series experience knowledge loss when their membership graduate. Unless there is a knowledge transfer process, that loss may lead to technical resources being underutilized or altogether becoming inactive. Alternative resources and processes always exist, but they either must be created from scratch, requiring non-zero time and resources, or are imperfect substitutes. If existing resources do the job perfectly fine, why go through all that effort?
+Just like any real-world organization, student-run organizations such as a film series experience knowledge loss when their members graduate. Without a knowledge transfer process, this loss can lead to technical resources being underutilized or becoming inactive. While alternative resources and processes may exist, they either need to be created from scratch, requiring significant time and resources, or are imperfect substitutes. If existing resources work perfectly fine, why go through all that effort?
 
-_LAFSCMS_ was developed to address that issue of knowledge loss by providing a CMS accessed through a user-friendly web interface to manage content and users.
+_LAFSCMS_ was developed to address this issue of knowledge loss by providing a CMS with a user-friendly web interface to manage content and users efficiently.
 
 ![LAFSCMS](docs/images/lafscms_1.png)
 
