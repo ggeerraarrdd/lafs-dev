@@ -4,7 +4,7 @@ A bespoke CMS for the Landscape Architecture Film Series website
 
 ## Description
 
-_LAFSCMS_ is the companion content management system (CMS) for the _Landscape Architecture Film Series_ [website](https://l-a-f-s.org/). Currently in alpha, the plan is to merge the beta version with the [film series repo](https://github.com/ggeerraarrdd/film-series).
+_LAFSCMS_ is the companion Content Management System (CMS) for the _Landscape Architecture Film Series_ [website](https://l-a-f-s.org/). Currently in alpha, the plan is to merge the beta version with the [film series repo](https://github.com/ggeerraarrdd/film-series).
 
 Just like any real-world organization, student-run organizations such as a film series experience knowledge loss when their members graduate. Without a knowledge transfer process, this loss can lead to technical resources being underutilized or becoming inactive. While alternative resources and processes may exist, they either need to be created from scratch, requiring significant time and resources, or are imperfect substitutes. If existing resources work perfectly fine, why go through all that effort?
 
@@ -29,13 +29,41 @@ The features of the system are based on business requirements as captured in the
 13. "As an admin, I want to manage users, so that their info and login credentials are correct and up-to-date.."
 14. "As an admin, I want to manage user privileges, so that users can access only the CMS functionalities based on their status and roles."
 
-As of v2.0.0-alpha.2, all user stories have been implemented except for #1, #6, #9 and #10.
+As of v2.0.0-alpha.5, all user stories have been implemented except for #1, #6, #9 and #10.
 
 More screenshots below.
 
 ## Disclaimer
 
 ALL CONTENTS IN THIS REPO ARE FOR EDUCATIONAL PURPOSES ONLY.
+
+## Project Structure
+
+```txt
+lafs-cms/
+├── README.md
+├── requirements.txt
+├── LICENSE
+├── docs/
+└── app/
+    ├── blueprints/
+    │   ├── main/
+    │   │   ├── __init__.py
+    │   │   ├── routes.py
+    │   │   ├── static/
+    │   │   ├── templates/
+    │   ├── cms/
+    │   │   ├── __init__.py
+    │   │   ├── routes.py
+    │   │   ├── static/
+    │   │   ├── templates/
+    ├── crud/
+    │   └── __init__.py
+    ├── helpers/
+    │   └── __init__.py
+    ├── app.py
+    └── lafs.db
+```
 
 ## Getting Started
 
