@@ -45,22 +45,30 @@ lafs-cms/
 ├── requirements.txt
 ├── LICENSE
 ├── docs/
+│
 └── app/
+    │
     ├── blueprints/
+    │   │
     │   ├── main/
     │   │   ├── __init__.py
     │   │   ├── routes.py
+    │   │   │
     │   │   ├── static/
-    │   │   ├── templates/
-    │   ├── cms/
-    │   │   ├── __init__.py
-    │   │   ├── routes.py
-    │   │   ├── static/
-    │   │   ├── templates/
+    │   │   └── templates/
+    │   │
+    │   └── cms/
+    │       ├── __init__.py
+    │       ├── routes.py
+    │       │
+    │       ├── static/
+    │       └── templates/
+    │
     ├── crud/
     │   └── __init__.py
     ├── helpers/
     │   └── __init__.py
+    │
     ├── app.py
     └── lafs.db
 ```
