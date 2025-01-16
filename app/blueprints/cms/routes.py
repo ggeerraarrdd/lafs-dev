@@ -3,13 +3,20 @@ import json
 import sqlite3
 
 # Third-Party Libraries
-from flask import Blueprint, redirect, render_template, request
+from flask import redirect, render_template, request
 from werkzeug.security import check_password_hash, generate_password_hash
 
-# Local Libraries
-from form import get_dicts, get_query, get_dicts_updates, get_query_update_series, get_query_update_schedules
-import queries 
+# Local
+import helpers
+import crud 
 from . import cms_bp
+
+
+
+
+
+
+
 
 
 
@@ -25,13 +32,13 @@ def cmsdash():
     series_id = active_series_id = 6
 
     # Get info on [active] (1) series, (2) schedules, and (3) series ids
-    series = dict(queries.get_info_series(db, series_id))
-    next = queries.get_info_cms_next_film(db, series_id)
-    films = queries.get_info_schedules(db, series_id)
-    series_ids = queries.get_info_series_ids(db)
+    series = dict(crud.get_info_series(db, series_id))
+    next = crud.get_info_cms_next_film(db, series_id)
+    films = crud.get_info_schedules(db, series_id)
+    series_ids = crud.get_info_series_ids(db)
 
-    serieses = queries.get_info_serieses(db)
-    # series_info = queries.get_info_series_status(db, series_id)
+    serieses = crud.get_info_serieses(db)
+    # series_info = crud.queries.get_info_series_status(db, series_id)
 
     return render_template("cms_index.html", 
                            current_series=series, 
@@ -49,12 +56,12 @@ def cmsseries():
     series_id = active_series_id = "6"
 
     # Get info on [active] (1) series, (2) schedules, and (3) series ids
-    series = dict(queries.get_info_series(db, series_id))
-    schedules = queries.get_info_schedules(db, series_id)
-    series_ids = queries.get_info_series_ids(db)
+    series = dict(crud.queries.get_info_series(db, series_id))
+    schedules = crud.queries.get_info_schedules(db, series_id)
+    series_ids = crud.queries.get_info_series_ids(db)
 
-    serieses = queries.get_info_serieses(db)
-    series_info = queries.get_info_series_status(db, series_id)
+    serieses = crud.queries.get_info_serieses(db)
+    series_info = crud.queries.get_info_series_status(db, series_id)
 
     return render_template("cms_series.html", 
                            current_series=series, 
@@ -71,7 +78,7 @@ def cmscreate():
 
         post = request.form.to_dict()
 
-        dicts = get_dicts(post)
+        dicts = helpers.get_dicts(post)
         dict_series = dicts[0]
         dict_schedule = dicts[1]
         dict_films = dicts[2]
@@ -86,17 +93,17 @@ def cmscreate():
         # FILM SERIES
         #
         # 1. Translate dict into SQL query
-        query_series = get_query(dict_series)
+        query_series = helpers.get_query(dict_series)
         # 2. Execute query
-        new_series_id = queries.insert_new_series(db, query_series)
+        new_series_id = crud.queries.insert_new_series(db, query_series)
 
         #
         # FILMS
         #
         # 1. Translate dict into SQL query
-        query_films = get_query(dict_films)
+        query_films = helpers.get_query(dict_films)
         # 2. Execute query
-        queries.insert_new_records(db, query_films)
+        crud.queries.insert_new_records(db, query_films)
 
         #
         # SCHEDULE
@@ -108,9 +115,9 @@ def cmscreate():
             if "id" in dict_schedule[film]:
                 dict_schedule[film]["film_id"] = dict_schedule[film].pop("id")
         # 1. Translate dict into SQL query
-        query_schedule = get_query(dict_schedule)
+        query_schedule = helpers.get_query(dict_schedule)
         # 2. Execute query
-        queries.insert_new_records(db, query_schedule)
+        crud.queries.insert_new_records(db, query_schedule)
 
         #
         # COLORS
@@ -118,9 +125,9 @@ def cmscreate():
         # 0. Update dictionary
         dict_colors = {"series_id": new_series_id, **dict_colors}
         # 1. Translate dict into SQL query
-        query_colors = get_query(dict_colors)
+        query_colors = helpers.get_query(dict_colors)
         # 2. Execute query
-        queries.insert_new_records(db, query_colors)
+        crud.queries.insert_new_records(db, query_colors)
 
 
         print(query_series)
@@ -144,7 +151,7 @@ def cms_view():
 
         # print(json.dumps(post, indent=4))
 
-        dicts = get_dicts_updates(post)
+        dicts = helpers.get_dicts_updates(post)
         dict_series = dicts[0]
         dict_schedule = dicts[1]
         # dict_films = dicts[2]
@@ -159,11 +166,11 @@ def cms_view():
         # FILM SERIES
         #
         # 1. Translate dict into SQL query
-        query_series = get_query_update_series(dict_series)
+        query_series = helpers.get_query_update_series(dict_series)
         # 2. Execute query
         if query_series is not None:
             print(query_series)
-            queries.update_records(db, query_series)
+            crud.queries.update_records(db, query_series)
         else:
             print("Series: nothing to update")
 
@@ -175,22 +182,22 @@ def cms_view():
             if "id" in dict_schedule[film]:
                 dict_schedule[film]["film_id"] = dict_schedule[film].pop("id")
         # 1. Translate dict into SQL query
-        query_schedule = get_query_update_schedules(dict_schedule)
+        query_schedule = helpers.get_query_update_schedules(dict_schedule)
         print(query_schedule)
         # 2. Execute query
         if query_schedule is not None:
             for query in query_schedule:
-                queries.update_records(db, query)
+                crud.queries.update_records(db, query)
 
         return redirect("/cms")
     
     else:
         cms_series_id = request.args.get('id')
        
-        cms_series = dict(queries.get_info_series(db, cms_series_id))
-        cms_schedules = queries.get_info_cms_schedules(db, cms_series_id)
+        cms_series = dict(crud.queries.get_info_series(db, cms_series_id))
+        cms_schedules = crud.queries.get_info_cms_schedules(db, cms_series_id)
         
-        cms_serieses = queries.get_info_serieses(db)
+        cms_serieses = crud.queries.get_info_serieses(db)
         cms_status = next((series for series in cms_serieses if series['series_id'] == int(cms_series_id)), None)
 
         if cms_status['status'] == 1:
@@ -226,7 +233,7 @@ def cms_unpublish():
 @cms_bp.route("/cms/films")
 def cmsfilms():
 
-    films = queries.get_info_cms_films(db)
+    films = crud.queries.get_info_cms_films(db)
 
     return render_template("cms_films.html", 
                             films=films,
@@ -240,7 +247,7 @@ def cmsorg():
         
         user_id = request.form.get("user-id")
 
-        user = queries.get_info_user(db, user_id)
+        user = crud.queries.get_info_user(db, user_id)
 
         return render_template("cms_user.html", 
                                user=user,
@@ -248,7 +255,7 @@ def cmsorg():
     
     else: 
 
-        users = queries.get_info_users(db)
+        users = crud.queries.get_info_users(db)
 
         return render_template("cms_org.html", 
                             users=users,
@@ -305,7 +312,7 @@ def cmsuser():
         form_name = request.form.get('form')
         user_id = request.form.get('user-id')
 
-        user = queries.get_info_user(db, user_id)
+        user = crud.queries.get_info_user(db, user_id)
 
         if form_name == "info":
 
@@ -338,7 +345,7 @@ def cmsuser():
                 update += 1
 
             if update > 0:
-                queries.update_user_info(db, 
+                crud.queries.update_user_info(db, 
                                          updated_name_first, 
                                          updated_name_last, 
                                          updated_username, 
@@ -353,7 +360,7 @@ def cmsuser():
             updated_status = int(request.form.get("status"))
 
             if current_status != updated_status:
-                queries.update_user_status(db, updated_status, user_id)
+                crud.queries.update_user_status(db, updated_status, user_id)
 
             return redirect("/cms/org")
         
@@ -367,7 +374,7 @@ def cmsuser():
 
             if check_password_hash(user["hash"], pass_current_form) and pass_updated == pass_updated_again:
 
-                queries.update_user_hash(db, generate_password_hash(pass_updated_again), user_id)
+                crud.queries.update_user_hash(db, generate_password_hash(pass_updated_again), user_id)
 
                 print("Password saved")
 
@@ -378,7 +385,7 @@ def cmsuser():
         
         elif form_name == "delete":
 
-            queries.delete_user(db, user_id)
+            crud.queries.delete_user(db, user_id)
 
             return redirect("/cms/org")
         
