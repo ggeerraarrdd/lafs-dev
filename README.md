@@ -15,25 +15,6 @@ _LAFSCMS_ was developed to address this issue of knowledge loss by providing a C
 
 ![LAFSCMS](docs/images/lafscms_1.png)
 
-The features of the system are based on business requirements as captured in the following user stories:
-
-1. "As an admin or a curator, I want to log in or log out of the CMS, so that I can access the functionalities of the CMS or stop that access."
-2. "As an admin or a curator, I want to create a film series, so that I can start the process of updating the website with the new film series."
-3. "As an admin or a curator, I want to edit a film series, so that information related to the film series is updated."
-4. "As an admin or a curator, I want to publish a film series, so that website visitors can view information about the film series."
-5. "As an admin or a curator, I want to unpublish a film series, so that the film series is removed from the website."
-6. "As an admin or a curator, I want to delete a film series, so that the film series is removed from both the website and database."
-7. "As an admin or a curator, I want to update a scheduled film in an ongoing series, so that website visitors are informed about new nformation."
-8. "As an admin or a curator, I want to see a list of all films in a completed, ongoing or unpublished series, so that I don't duplicate a film in a future series."
-9. "As an admin or a curator, I want to media files, so that they are correct and up-to-date on the website or database."
-10. "As an admin or curator, I want to read documentations on using the film series website and CMS, so that I can use them properly."
-11. "As an admin or curator, I want to edit my user info and login credentials, so that they are correct and up-to-date."
-12. "As an admin, I want to register new users, so that they can access the CMS."
-13. "As an admin, I want to manage users, so that their info and login credentials are correct and up-to-date.."
-14. "As an admin, I want to manage user privileges, so that users can access only the CMS functionalities based on their status and roles."
-
-As of v2.0.0-alpha.5, all user stories have been implemented except for #1, #6, #9 and #10.
-
 More screenshots below.
 
 ## Table of Contents
