@@ -19,7 +19,23 @@ More screenshots below.
 
 ## Table of Contents
 
-TODO
+* [Description](#description)
+* [Features](#features)
+* [Project Structure](#project-structure)
+* [Prerequisites](#prerequisites)
+* [Getting Started](#getting-started)
+  * [Dependencies](#dependencies)
+  * [Installation](#installation)
+  * [Usage](#usage)
+* [Author(s)](#authors)
+* [Version History](#version-history)
+  * [Release Notes](#release-notes)
+  * [Initial Release](#initial-release)
+* [Future Work](#future-work)
+* [License](#license)
+* [Contributing](#contributing)
+* [Acknowledgments](#acknowledgments)
+* [Screenshots](#screenshots)
 
 ## Features
 
@@ -83,7 +99,7 @@ lafs-cms/
 └── requirements.txt
 ```
 
-## Prerequisities
+## Prerequisites
 
 TODO
 
@@ -166,9 +182,13 @@ TODO
 
 * See [https://github.com/ggeerraarrdd/lafs-cms/releases](https://github.com/ggeerraarrdd/lafs-cms/releases)
 
+### Initial Release
+
+TODO
+
 ## Future Work
 
-Development of primary features is ongoing.
+Development of core features is ongoing.
 
 ## License
 
