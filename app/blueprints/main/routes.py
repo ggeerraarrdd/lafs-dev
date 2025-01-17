@@ -9,16 +9,19 @@ from flask import request
 from flask import session
 
 # Local
-import helpers
-import crud
 from . import main_bp
+from config import DATABASE_PATH
+from config import MAP_API_KEY
+import crud
+import helpers
 
 
 
 
-# Set constants
-MAP_API_KEY = os.environ.get("MAP_API_KEY")
-DATABASE_NAME = os.environ.get("DATABASE_NAME")
+
+
+
+
 
 
 @main_bp.route("/", methods=["GET", "POST"])
@@ -43,7 +46,7 @@ def index():
         return redirect("/")
 
     # Get info of [current] series id
-    query_result = crud.get_id_current_series(DATABASE_NAME)
+    query_result = crud.get_id_current_series(DATABASE_PATH)
 
     # Update session
     session["active_series_id"] = session["current_series_id"] = query_result[0]
@@ -55,7 +58,7 @@ def index():
     series_id = session["active_series_id"]
 
     # Get info on [past] (1) series, (2) schedules, and (3) series ids
-    series, schedules, series_ids = helpers.get_series_data(DATABASE_NAME, series_id)
+    series, schedules, series_ids = helpers.get_series_data(DATABASE_PATH, series_id)
 
     return render_template("index.html",
                             series=series,
@@ -95,7 +98,7 @@ def series_view():
         session["active_series_id"] = series_id
 
         # Get info on [past] (1) series, (2) schedules, and (3) series ids
-        series, schedules, series_ids = helpers.get_series_data(DATABASE_NAME, series_id)
+        series, schedules, series_ids = helpers.get_series_data(DATABASE_PATH, series_id)
 
         return render_template("index.html",
                                series=series,
@@ -132,10 +135,10 @@ def film_view():
         film_id = request.form.get("film-id")
 
         # Get info on [past] (1) series, (2) schedules, and (3) series ids
-        series, schedules, series_ids = helpers.get_series_data(DATABASE_NAME, series_id)
+        series, schedules, series_ids = helpers.get_series_data(DATABASE_PATH, series_id)
 
         # Get info of requested film
-        film = crud.get_info_film(DATABASE_NAME, film_id)
+        film = crud.get_info_film(DATABASE_PATH, film_id)
 
         return render_template("film.html",
                                series=series,
@@ -162,7 +165,7 @@ def location_view():
     series_id = session["active_series_id"]
 
     # Get info on [past] (1) series, (2) schedules, and (3) series ids
-    series, schedules, series_ids = helpers.get_series_data(DATABASE_NAME, series_id)
+    series, schedules, series_ids = helpers.get_series_data(DATABASE_PATH, series_id)
 
     return render_template("location.html",
                            series=series,
@@ -187,7 +190,7 @@ def org_view():
     series_id = session["active_series_id"]
 
     # Get info on [past] (1) series, (2) schedules, and (3) series ids
-    series, schedules, series_ids = helpers.get_series_data(DATABASE_NAME, series_id)
+    series, schedules, series_ids = helpers.get_series_data(DATABASE_PATH, series_id)
 
     return render_template("org.html",
                            series=series,

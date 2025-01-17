@@ -1,7 +1,7 @@
 {% extends "layout.html" %}
 
 {% block location %}
-<script type="module" src="/static/map.js"></script>
+<script type="module" src="{{ url_for('main_bp.static', filename='map.js') }}"></script>
 {% endblock %}
 
 {% block title %}{{ series.series_title }}{% endblock %}
