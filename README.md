@@ -41,36 +41,37 @@ ALL CONTENTS IN THIS REPO ARE FOR EDUCATIONAL PURPOSES ONLY.
 
 ```txt
 lafs-cms/
-├── README.md
-├── requirements.txt
-├── LICENSE
-├── docs/
 │
-└── app/
-    │
-    ├── blueprints/
-    │   │
-    │   ├── main/
-    │   │   ├── __init__.py
-    │   │   ├── routes.py
-    │   │   │
-    │   │   ├── static/
-    │   │   └── templates/
-    │   │
-    │   └── cms/
-    │       ├── __init__.py
-    │       ├── routes.py
-    │       │
-    │       ├── static/
-    │       └── templates/
-    │
-    ├── crud/
-    │   └── __init__.py
-    ├── helpers/
-    │   └── __init__.py
-    │
-    ├── app.py
-    └── lafs.db
+├── app/
+│   │
+│   ├── blueprints/
+│   │   │
+│   │   ├── cms/
+│   │   │   ├── __init__.py
+│   │   │   ├── routes.py
+│   │   │   ├── static/
+│   │   │   └── templates/
+│   │   │
+│   │   └── main/
+│   │       ├── __init__.py
+│   │       ├── routes.py
+│   │       ├── static/
+│   │       └── templates/
+│   │
+│   ├── crud/
+│   │   └── __init__.py
+│   │
+│   ├── helpers/
+│   │   └── __init__.py
+│   │
+│   ├── app.py
+│   └── lafs.db
+│
+├── docs/
+├── .gitignore
+├── LICENSE
+├── README.md
+└── requirements.txt
 ```
 
 ## Getting Started
