@@ -4,6 +4,9 @@ A bespoke CMS for the Landscape Architecture Film Series website
 
 ## Description
 
+> [!NOTE]
+> ALL CONTENTS IN THIS REPO ARE FOR EDUCATIONAL PURPOSES ONLY.
+
 _LAFSCMS_ is the companion Content Management System (CMS) for the _Landscape Architecture Film Series_ [website](https://l-a-f-s.org/). Currently in alpha, the plan is to merge the beta version with the [film series repo](https://github.com/ggeerraarrdd/film-series).
 
 Just like any real-world organization, student-run organizations such as a film series experience knowledge loss when their members graduate. Without a knowledge transfer process, this loss can lead to technical resources being underutilized or becoming inactive. While alternative resources and processes may exist, they either need to be created from scratch, requiring significant time and resources, or are imperfect substitutes. If existing resources work perfectly fine, why go through all that effort?
@@ -33,9 +36,29 @@ As of v2.0.0-alpha.5, all user stories have been implemented except for #1, #6, 
 
 More screenshots below.
 
-## Disclaimer
+## Table of Contents
 
-ALL CONTENTS IN THIS REPO ARE FOR EDUCATIONAL PURPOSES ONLY.
+TODO
+
+## Features
+
+* Content Management
+  * Complete film series lifecycle handling (Create, Edit, Publish, Unpublish)
+  * Flexible schedule management tools
+  * Integrated media asset handling
+
+* Security
+  * Secure authentication with role-based controls (Admin and Curator roles)
+  * Basic user privilege management
+  * Baseline database security implementation
+
+* Database Features
+  * Historical data preservation
+  * Searchable archive
+
+* Interface
+  * Instant content synchronization
+  * Multi-user collaboration support
 
 ## Project Structure
 
@@ -78,6 +101,10 @@ lafs-cms/
 ├── README.md
 └── requirements.txt
 ```
+
+## Prerequisities
+
+TODO
 
 ## Getting Started
 
@@ -158,13 +185,17 @@ lafs-cms/
 
 * See [https://github.com/ggeerraarrdd/lafs-cms/releases](https://github.com/ggeerraarrdd/lafs-cms/releases)
 
-### Future Work
+## Future Work
 
 Development of primary features is ongoing.
 
 ## License
 
 * [MIT License](https://github.com/ggeerraarrdd/large-parks/blob/main/LICENSE)
+
+## Contributing
+
+TODO
 
 ## Acknowledgments
 
@@ -178,3 +209,7 @@ Development of primary features is ongoing.
 ![LAFSCMS](docs/images/lafscms_5.png)
 ![LAFSCMS](docs/images/lafscms_6.png)
 ![LAFSCMS](docs/images/lafscms_7.png)
+
+## Fronticepiece
+
+TODO
