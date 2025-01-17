@@ -58,14 +58,19 @@ lafs-cms/
 │   │       ├── static/
 │   │       └── templates/
 │   │
+│   ├── config/
+│   │   └── __init__.py
+│   │
 │   ├── crud/
 │   │   └── __init__.py
+│   │
+│   ├── data/
+│   │   └── lafs.db
 │   │
 │   ├── helpers/
 │   │   └── __init__.py
 │   │
-│   ├── app.py
-│   └── lafs.db
+│   └── app.py
 │
 ├── docs/
 ├── .gitignore
