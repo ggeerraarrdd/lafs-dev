@@ -26,6 +26,7 @@ More screenshots below.
 * [Getting Started](#getting-started)
   * [Dependencies](#dependencies)
   * [Installation](#installation)
+  * [Configuration](#installation)
   * [Usage](#usage)
 * [Author(s)](#authors)
 * [Version History](#version-history)
@@ -101,7 +102,7 @@ lafs-cms/
 
 ## Prerequisites
 
-TODO
+* TBD
 
 ## Getting Started
 
@@ -150,11 +151,15 @@ TODO
 
 6. **Notes on Flask Secret Keys:**
 
-    TODO
+    * TBD
 
 7. **Notes on Google Maps API Keys:**
 
-    TODO
+    * TBD
+
+### Configuration
+
+* TBD
 
 ### Usage
 
@@ -184,7 +189,7 @@ TODO
 
 ### Initial Release
 
-TODO
+* TBD
 
 ## Future Work
 
@@ -196,7 +201,7 @@ Development of core features is ongoing.
 
 ## Contributing
 
-TODO
+* TBD
 
 ## Acknowledgments
 
@@ -211,6 +216,6 @@ TODO
 ![LAFSCMS](docs/images/lafscms_6.png)
 ![LAFSCMS](docs/images/lafscms_7.png)
 
-## Fronticepiece
+## Frontispiece
 
-TODO
+* TBD
