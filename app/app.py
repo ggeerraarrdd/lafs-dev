@@ -1,3 +1,7 @@
+"""
+TD
+"""
+
 # Python Standard Library
 import os
 
@@ -5,9 +9,9 @@ import os
 from flask import Flask
 from flask_session import Session
 
-# Local 
-from blueprints.main.routes import main_bp
-from blueprints.cms.routes import cms_bp
+# Local
+from app.blueprints.main.routes import main_bp
+from app.blueprints.cms.routes import cms_bp
 
 
 

@@ -66,6 +66,7 @@ flask_session/
 instance/
 .webassets-cache
 _[a-zA-Z]*.py
+database_manager.log
 
 # Scrapy stuff:
 .scrapy

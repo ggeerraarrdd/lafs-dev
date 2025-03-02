@@ -1,5 +1,6 @@
-import json
-
+"""
+TD
+"""
 
 
 
@@ -10,7 +11,9 @@ import json
 
 
 def get_dicts(post):
-   
+    """
+    TD
+    """
     keys_series = [
         "new_series_semester",
         "new_series_year",
@@ -81,31 +84,31 @@ def get_dicts(post):
             if k in keys_films:
                 film_values[k] = v
         dict_films[key] = film_values
-    
+
     # PART 4
     # Create films dict
     dict_colors = {k: post[k] for k in keys_colors if k in post}
-    
+
     # RETURN
     return dict_series, dict_schedule, dict_films, dict_colors
 
 
-def get_query(dict):
+def get_query(data):
+    """
+    Translate dictionary into an INSERT query statement
+    """
+    # keys_series = [
+    #     "new_series_semester",
+    #     "new_series_year",
+    #     "new_series_title",
+    #     "new_series_brief",
+    #     "new_series_poster"
+    # ]
 
-    # Translate dictionary into an INSERT query statement
-
-    keys_series = [
-        "new_series_semester",
-        "new_series_year",
-        "new_series_title",
-        "new_series_brief",
-        "new_series_poster"
-    ]
-
-    keys_schedule = [
-        "id",
-        "schedule"
-        ]
+    # keys_schedule = [
+    #     "id",
+    #     "schedule"
+    #     ]
 
     keys_films = [
         "id",
@@ -118,22 +121,22 @@ def get_query(dict):
         "note"
         ]
 
-    keys_colors = [
-        "color1",
-        "color2",
-        "color3"
-        ]
+    # keys_colors = [
+    #     "color1",
+    #     "color2",
+    #     "color3"
+    #     ]
 
-    if "film1" in dict:
-        if "schedule" in list(dict["film1"].keys()):
-             table_name = "schedules"
-        if "film_title" in list(dict["film1"].keys()):
+    if "film1" in data:
+        if "schedule" in list(data["film1"].keys()):
+            table_name = "schedules"
+        if "film_title" in list(data["film1"].keys()):
             table_name = "films"
-        
+
         # COLUMNS
         col_names = ""
 
-        for key in dict['film1'].keys():
+        for key in data['film1'].keys():
             col_names += key + ", "
 
         col_names = col_names.rstrip(", ")
@@ -141,9 +144,9 @@ def get_query(dict):
         # VALUES
         values = ""
 
-        for keys_films in dict.keys():
+        for keys_films in data.keys():
             values += "("
-            for key, value in dict[keys_films].items():
+            for key, value in data[keys_films].items():
                 values += f"'{value}', "
             values = values.rstrip(", ")
             values += "), "
@@ -151,22 +154,24 @@ def get_query(dict):
         values = values.rstrip(", ")
 
         # FULL QUERY
-        query = f"INSERT INTO {table_name} ({col_names}) VALUES {values};"
+        query = f"INSERT INTO {table_name} ({col_names}) VALUES {values};" # pylint: disable=possibly-used-before-assignment
     else:
-        if "series_title" in dict:
-                table_name = "series"
-        elif 'color1' in dict:
-                table_name = "colors"
+        if "series_title" in data:
+            table_name = "series"
+        elif 'color1' in data:
+            table_name = "colors"
 
-        columns = ", ".join(dict.keys())
-        values = ", ".join(["'" + str(value) + "'" for value in dict.values()])
+        columns = ", ".join(data.keys())
+        values = ", ".join(["'" + str(value) + "'" for value in data.values()])
         query = f"INSERT INTO {table_name} ({columns}) VALUES ({values});"
 
     return query
 
 
 def get_dicts_updates(post):
-   
+    """
+    TD
+    """
     keys_series = [
         "series_number",
         "series_semester",
@@ -241,23 +246,25 @@ def get_dicts_updates(post):
             if k in keys_films:
                 film_values[k] = v
         dict_films[key] = film_values
-    
+
     # PART 4
     # Create films dict
     dict_colors = {k: post[k] for k in keys_colors if k in post}
-    
+
     # RETURN
     return dict_series, dict_schedule, dict_films, dict_colors
 
 
-def get_query_update_series(dict):
-
-    series_number = dict.get("series_number")
+def get_query_update_series(data):
+    """
+    TD
+    """
+    series_number = data.get("series_number")
 
     set_values = []
 
     count = 0
-    for key, value in dict.items():
+    for key, value in data.items():
         if key != "series_number":
             if value:
                 set_values.append(f"{key} = '{value}'")
@@ -273,16 +280,18 @@ def get_query_update_series(dict):
     return query
 
 
-def get_query_update_schedules(dict):
-
+def get_query_update_schedules(data):
+    """
+    TD
+    """
     count = 0
     query = []
 
-    for key, value in dict.items():
+    for key, value in data.items(): # pylint: disable=unused-variable
 
         set_values = []
         set_condition = []
-        
+
         if value["notes"]:
             for inner_key, inner_value in value.items():
                 if inner_key != "schedule_id":
@@ -290,7 +299,7 @@ def get_query_update_schedules(dict):
                         set_values.append(f"film_id = '{inner_value}'")
                     else:
                         set_values.append(f"{inner_key} = '{inner_value}'")
-                elif inner_key == "schedule_id": 
+                elif inner_key == "schedule_id":
                     set_condition.append(f"{inner_key} = '{inner_value}'")
 
             set_values = ", ".join(set_values)

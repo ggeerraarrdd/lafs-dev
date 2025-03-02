@@ -1,13 +1,10 @@
+"""
+TD
+"""
+
 # Python Standard Library
 from functools import wraps
-from typing import Tuple, List, Dict
 from flask import render_template, redirect, session
-
-# Local Libraries
-import crud
-from .helpers_database import *
-from .helpers_dicts import *
-from .helpers_main import *
 
 
 
@@ -43,6 +40,6 @@ def login_required(f):
     def decorated_function(*args, **kwargs):
         if session.get("user_id") is None:
             return redirect("/login")
-        
+
         return f(*args, **kwargs)
     return decorated_function
