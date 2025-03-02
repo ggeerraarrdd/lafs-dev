@@ -48,17 +48,13 @@ Tossed into this development playground, it has so far borne out the following:
 
   _LAFS_ but live online!
 
-* [**_LAFS-AWS_**](https://l-a-f-s.org)
+* [**_LAFS-CMS_**](https://github.com/ggeerraarrdd/lafs-cms)
 
-  _LAFS_ but live online!
+  A bespoke Content Management System (CMS) for the web application.
 
-* [**_LAFSCMS_**](https://github.com/ggeerraarrdd/lafs-dev)
+  Just like any organization in the real world, student-run organizations such as a film series experience knowledge loss when their members graduate. Without a knowledge transfer process, this loss can lead to technical resources being underutilized or becoming inactive. While alternative resources and processes may exist, they either need to be created from scratch, requiring significant time and resources, or are imperfect substitutes. If existing resources work perfectly fine, why go through all that effort?
 
-  A companion Content Management System (CMS) for the web application (this repository; separate repo coming soon).
-
-  Just like any real-world organization, student-run organizations such as a film series experience knowledge loss when their members graduate. Without a knowledge transfer process, this loss can lead to technical resources being underutilized or becoming inactive. While alternative resources and processes may exist, they either need to be created from scratch, requiring significant time and resources, or are imperfect substitutes. If existing resources work perfectly fine, why go through all that effort?
-
-  LAFSCMS, then, was conceived as a solution to the problem of knowledge loss by providing a platform to manage content and users efficiently with a user-friendly web interface.
+  _LAFS-CMS_, then, was conceived as a solution to the problem of knowledge loss by providing a platform to manage content and users efficiently with a user-friendly web interface.
 
 What else might be concocted out from a decades-old website? Stay tuned!
 
