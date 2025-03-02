@@ -1,25 +1,14 @@
-# LAFSCMS
+# LAFS-DEV
 
-A bespoke CMS for the Landscape Architecture Film Series website
+An early aughts basic website turned modern dev playground for front-end and back-end skill building
 
-## Description
+## Table of Contents
 
 > [!NOTE]
 > ALL CONTENTS IN THIS REPO ARE FOR EDUCATIONAL PURPOSES ONLY.
 
-_LAFSCMS_ is the companion Content Management System (CMS) for the _Landscape Architecture Film Series_ [website](https://l-a-f-s.org/). Currently in alpha, the plan is to merge the beta version with the [film series repo](https://github.com/ggeerraarrdd/film-series).
-
-Just like any real-world organization, student-run organizations such as a film series experience knowledge loss when their members graduate. Without a knowledge transfer process, this loss can lead to technical resources being underutilized or becoming inactive. While alternative resources and processes may exist, they either need to be created from scratch, requiring significant time and resources, or are imperfect substitutes. If existing resources work perfectly fine, why go through all that effort?
-
-_LAFSCMS_ was developed to address this issue of knowledge loss by providing a CMS with a user-friendly web interface to manage content and users efficiently.
-
-![LAFSCMS](docs/images/lafscms_1.png)
-
-More screenshots below.
-
-## Table of Contents
-
 * [Description](#description)
+* [Target Users](#target-users)
 * [Features](#features)
 * [Project Structure](#project-structure)
 * [Prerequisites](#prerequisites)
@@ -27,7 +16,8 @@ More screenshots below.
   * [Dependencies](#dependencies)
   * [Installation](#installation)
   * [Configuration](#installation)
-  * [Usage](#usage)
+* [Usage](#usage)
+* [System Administration](#system-administration)
 * [Author(s)](#authors)
 * [Version History](#version-history)
   * [Release Notes](#release-notes)
@@ -38,40 +28,60 @@ More screenshots below.
 * [Acknowledgments](#acknowledgments)
 * [Screenshots](#screenshots)
 
+## Description
+
+In the early aughts, I created a website for a Landscape Architecture Film Series, which I co-founded and co-curated for the Department of Landscape Architecture at the University of Illinois Urbana/Champaign.
+
+Now some odd years later and needing a website to use as a learning vehicle for back-end technical skill-building, but not wanting to spend anytime to ideate and design a new one from scratch, I turned to my old website. Its look and feel has aged well, I think, and indeed looks remarkably contemporary. For instance, if the current version of MoMA's film series is anything to go by, bold color blocking isn't a dated design choice.
+
+Using that decades-old website, this development playground has borne out these outcomes:
+
+* [_LAFS_](https://github.com/ggeerraarrdd/lafs)
+
+  A digital archive of the website as a dynamic web application.
+
+  What would otherwise exist as slowly disintegrating bits on a forgotten CD in a remote storage facility or as [fragmented snapshots](https://web.archive.org/web/20040827234527/http://www.rehearsal.uiuc.edu/projects/filmseries/) somewhere in the depths of the Internet Archive has been meticulously restored and recreated.
+
+  No longer basic or static—but a dynamic web application with modern tooling such as Python, Flask, SQLite and AWS. It even has a data model to speak of. It’s interesting to note that the original website predated almost all of the technology used.
+
+* [l-a-f-s.org](https://l-a-f-s.org)
+
+  _LAFS_ but live online!
+
+* _LAFSCMS_
+
+  A companion Content Management System (CMS) - this repository.
+
+  Just like any real-world organization, student-run organizations such as a film series experience knowledge loss when their members graduate. Without a knowledge transfer process, this loss can lead to technical resources being underutilized or becoming inactive. While alternative resources and processes may exist, they either need to be created from scratch, requiring significant time and resources, or are imperfect substitutes. If existing resources work perfectly fine, why go through all that effort?
+
+  This CMS, then, was conceived as a solution to the problem of knowledge loss by providing a platform to manage content and users efficiently with a user-friendly web interface.
+
+What else might be concocted from this development playground? Stay tuned!
+
+![LAFSCMS](docs/images/lafscms_1.png)
+
+## Target Users
+
+* TBD
+
 ## Features
 
-* Content Management
-  * Complete film series lifecycle handling (Create, Edit, Publish, Unpublish)
-  * Flexible schedule management tools
-  * Integrated media asset handling
-
-* Security
-  * Secure authentication with role-based controls (Admin and Curator roles)
-  * Basic user privilege management
-  * Baseline database security implementation
-
-* Database Features
-  * Historical data preservation
-  * Searchable archive
-
-* Interface
-  * Instant content synchronization
-  * Multi-user collaboration support
+* TBD
 
 ## Project Structure
 
 ```txt
-lafs-cms/
+lafs-dev/
 │
 ├── app/
 │   │
 │   ├── blueprints/
 │   │   │
 │   │   ├── cms/
-│   │   │   ├── __init__.py
-│   │   │   ├── routes.py
-│   │   │   ├── static/
-│   │   │   └── templates/
+│   │   │    ├── __init__.py
+│   │   │    ├── routes.py
+│   │   │    ├── static/
+│   │   │    └── templates/
 │   │   │
 │   │   └── main/
 │   │       ├── __init__.py
@@ -88,10 +98,15 @@ lafs-cms/
 │   ├── data/
 │   │   └── lafs.db
 │   │
-│   ├── helpers/
+│   ├── infra/
+│   │   └── __init__.py
+│   │
+│   ├── utils/
 │   │   └── __init__.py
 │   │
 │   └── app.py
+│
+├── logs/
 │
 ├── docs/
 ├── .gitignore
@@ -112,70 +127,113 @@ lafs-cms/
 
 ### Installation
 
-1. **Clone the repository:**
+1. **Clone the repository**
 
     ```bash
-    git clone https://github.com/ggeerraarrdd/lafs-cms.git
+    git clone https://github.com/ggeerraarrdd/lafs-dev.git
     ```
 
-2. **Navigate into the project directory:**
+2. **Set up a Python virtual environment**
 
     ```bash
-    cd lafs-cms # For example
-    ```
-
-3. **Create and activate a virtual environment:**
-
-    ```bash
-    python -m venv venv
+    python3 -m venv venv
     source venv/bin/activate  # On Windows use `venv\Scripts\activate`
     ```
 
-4. **Install the dependencies:**
+3. **Install the dependencies**
 
     ```bash
+    pip install --upgrade pip
     pip install -r requirements.txt
     ```
 
-5. **Create an `.env` file and set the environment variables:**
-
-    Create a file named `.env` in the `app` directory of the project and add the following variables:
-
-    ```properties
-    SECRET_KEY=your_secret_key
-    MAP_API_KEY=your_map_api_key
-    DATABASE_NAME="lafs.db"
-    ```
-
-    Replace `your_secret_key` (see #6 below) and `your_map_api_key` (see # 7 below) with your actual secret key and API key.
-
-6. **Notes on Flask Secret Keys:**
-
-    * TBD
-
-7. **Notes on Google Maps API Keys:**
-
-    * TBD
-
 ### Configuration
 
-* TBD
+1. **Create an `.env` file**
 
-### Usage
+    Place the file in the root directory and add the following as default:
 
-1. **Go into the app directory and run the command:**
+    ```python
+    # Database Path
+    DATABASE_NAME='data/lafs.db'
+
+    # Database Connection Pool
+    POOL_SIZE=5
+    MAX_OVERFLOW=10
+    POOL_TIMEOUT=30
+    POOL_RECYCLE=-1
+    ECHO=False
+
+    # Database Retry Settings
+    MAX_RETRIES=3
+    BASE_DELAY=1
+    MAX_DELAY=10
+
+    # Flask Secret Key
+    SECRET_KEY='your_flask_secret_key'
+
+    # Google Maps API Key
+    MAP_API_KEY='your_map_api_key'
+    ```
+
+2. **Database**
+
+    ```python
+    # Database Path
+    DATABASE_NAME='data/lafs.db'  # Path to SQLite database file
+
+    # Database Connection Pool
+    POOL_SIZE=15   # Max number of persistent connections
+    MAX_OVERFLOW=5  # Max number of connections above POOL_SIZE
+    POOL_TIMEOUT=30  # Seconds to wait for available connection
+    POOL_RECYCLE=1800  # Seconds before connection is recycled
+    ECHO=False  # Enable SQLAlchemy engine logging
+
+    # Database Retry Settings
+    MAX_RETRIES=3  #  Max retry attempts for failed operations
+    BASE_DELAY=1  # Initial delay between retries in seconds
+    MAX_DELAY=10  # Max delay between retries in seconds
+    ```
+
+3. **Flask Secret Key**
+
+    ```python
+    # Flask Secret Key
+    SECRET_KEY='your_flask_secret_key'
+    ```
+
+4. **Google Maps API Key**
+
+    ```python
+    # Google Maps API Key
+    MAP_API_KEY='your_map_api_key'
+    ```
+
+    An API Key is needed for the embedded map to work. Before you can create one, you will need to create a Google Cloud project, for which you need a Google Cloud account.
+
+    * [Set up a Google Cloud account](https://cloud.google.com)
+    * [Set up your Google Cloud project](https://developers.google.com/maps/documentation/javascript/cloud-setup)
+    * [Using API Keys](https://developers.google.com/maps/documentation/javascript/get-api-key)
+
+## Usage
+
+1. **Go into the app directory and run the command**
 
     ```bash
     flask run
     ```
 
-2. **Open the film series website:**
+2. **Open the film series website**
 
     Copy and open the URL displayed after 'Running on' in the terminal.
 
-3. **Access the CMS:**
+3. **Access the CMS**
 
     Add `/cms` at the end of the URL.
+
+## System Administration
+
+* TBD
 
 ## Author(s)
 
@@ -205,7 +263,7 @@ Development of core features is ongoing.
 
 ## Acknowledgments
 
-* Notion AI
+* Coeus
 
 ## Screenshots
 
