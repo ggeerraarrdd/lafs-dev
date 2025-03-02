@@ -1,5 +1,0 @@
-"""
-TD
-"""
-
-from . import routes
