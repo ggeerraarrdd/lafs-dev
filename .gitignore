@@ -163,19 +163,9 @@ cython_debug/
 #  option (not recommended) you can uncomment the following to ignore the entire idea folder.
 # .idea/
 
-# Pylint
-.pylintrc
-
 # VS Code
 .commons
 .vscode
 
-# markdownlint.config
-.markdownlint*
-
 # macOS
 .DS_Store
-
-# Docker
-Dockerfile
-.dockerignore
