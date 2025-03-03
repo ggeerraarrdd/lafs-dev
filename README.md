@@ -1,6 +1,6 @@
 # LAFS-DEV
 
-An early aughts basic website turned modern dev playground for full-stack, DevOps and system architecture skill-building
+An early aughts website turned modern dev playground for full-stack, DevOps and system architecture skill-building
 
 ## Table of Contents
 
@@ -32,7 +32,7 @@ An early aughts basic website turned modern dev playground for full-stack, DevOp
 
 In the early aughts, I created a website for the _Landscape Architecture Film Series_, a student-led initiative which I co-founded and co-curated for the [Department of Landscape Architecture](https://landarch.illinois.edu/) at the University of Illinois Urbana-Champaign.
 
-Now some odd years later, I needed a website to use as a learning vehicle for technical skill-building. But not wanting to spend anytime to ideate and design a new one from scratch, I turned to my [old website](https://web.archive.org/web/20040827234527/http://www.rehearsal.uiuc.edu/projects/filmseries/). Its look and feel has aged well, I think, and indeed looks remarkably contemporary. For instance, if the current version of MoMA's film series [website](https://www.moma.org/calendar/film/) is anything to go by, bold color blocking isn't a dated design choice. In other words, I could focus on the back-end and spend little or no time on the front-end.
+Now some odd years later, I needed a website to use as a learning vehicle for technical skill-building. But not wanting to spend anytime to ideate and design a new one from scratch, I turned to my [old website](https://web.archive.org/web/20040827234527/http://www.rehearsal.uiuc.edu/projects/filmseries/). Its look and feel has aged well, I think, and indeed looks remarkably contemporary. For instance, if the current version of MoMA's film series [website](https://www.moma.org/calendar/film/) is anything to go by, bold color blocking isn't a dated design choice. In other words, I could focus on the back end and spend little or no time on the front end.
 
 Tossed into this development playground, it has so far borne out the following:
 
@@ -42,7 +42,7 @@ Tossed into this development playground, it has so far borne out the following:
 
   What would otherwise exist as slowly disintegrating bits on a forgotten CD in a remote storage facility or as [fragmented snapshots](https://web.archive.org/web/20040827234527/http://www.rehearsal.uiuc.edu/projects/filmseries/) somewhere in the depths of the Internet Archive has been meticulously restored and recreated.
 
-  All the content, design elements and information architecture are as they were. However, it's no longer basic or static but a dynamic web application with modern tooling such as Python, Flask and SQLite. It even has a data model to speak of. It's interesting to note that the original website predated almost all of the technology used.
+  All the content, design elements and information architecture are as they were. But it's no longer a static website—it's now a dynamic web application with modern tooling such as Python, Flask and SQLite. It even has a data model to speak of. What's particularly interesting to note here is that the original website predated almost all of the technology used.
 
 * [**l-a-f-s.org**](https://l-a-f-s.org)
 
@@ -50,11 +50,11 @@ Tossed into this development playground, it has so far borne out the following:
 
 * [**_LAFS-CMS_**](https://github.com/ggeerraarrdd/lafs-cms)
 
-  A bespoke Content Management System (CMS) for the web application.
+  A bespoke Content Management System (CMS) for the website.
 
-  Just like any organization in the real world, student-run organizations such as a film series experience organizational knowledge loss (KLT) when their members graduate. Without a knowledge transfer process, this loss can lead to technical resources being underutilized or becoming inactive. While alternative resources and processes may exist, they either need to be created from scratch, requiring significant time and resources, or are imperfect substitutes. If existing resources work perfectly fine, why go through all that effort?
+  Just like any organization in the real world, student-run organizations such as a film series experience [organizational knowledge loss (KLT)](https://www.emerald.com/insight/content/doi/10.1108/tlo-09-2022-0108/full/html) when their members graduate. Without a knowledge transfer process, this loss can lead to technical resources being underutilized or becoming inactive. While alternative resources and processes may exist, they either need to be created from scratch, requiring significant time and resources, or are imperfect substitutes. If existing resources work perfectly fine, why go through all that effort?
 
-  _LAFS-CMS_, then, was conceived as a solution to the problem of KLT by providing a platform to manage content and users efficiently with a user-friendly web interface.
+  _LAFS-CMS_, then, was conceived as an Information System solution for mitigating KLT. Through a user-friendly web interface, it provides a platform for curating public-facing content and internal administrative resources.
 
 What else might be concocted out from a decades-old website? Stay tuned!
 
@@ -67,7 +67,7 @@ What else might be concocted out from a decades-old website? Stay tuned!
 
 _LAFS-DEV_ is intended for:
 
-* **Self-guided learners** on a similar skill-building path towards full-stack development, DevOps and system architecture proficiency.
+* **Self-guided learners** on a similar skill-building path towards full-stack, DevOps and system architecture proficiency.
 * **Technology educators** looking for a demonstration project with pedagogical value.
 * **Potential employers or recruiters** reviewing portfolio work.
 
