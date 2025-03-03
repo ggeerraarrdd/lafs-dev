@@ -54,7 +54,7 @@ Tossed into this development playground, it has so far borne out the following:
 
   Just like any organization in the real world, student-run organizations such as a film series experience [organizational knowledge loss (KLT)](https://www.emerald.com/insight/content/doi/10.1108/tlo-09-2022-0108/full/html) when their members graduate. Without a knowledge transfer process, this loss can lead to technical resources being underutilized or becoming inactive. While alternative resources and processes may exist, they either need to be created from scratch, requiring significant time and resources, or are imperfect substitutes. If existing resources work perfectly fine, why go through all that effort?
 
-  _LAFS-CMS_, then, was conceived as an Information System solution for mitigating KLT. Through a user-friendly web interface, it provides a platform for curating public-facing content and internal administrative resources.
+  _LAFS-CMS_, then, was conceived as an Information System solution for mitigating KLT by simplifying content management. With its user-friendly web interface and automated workflows, it aims to significantly lower technical barriers, enabling all members—regardless of technical expertise—to easily curate public-facing content and internal administrative resources.
 
 What else might be concocted out from a decades-old website? Stay tuned!
 
