@@ -11,12 +11,14 @@ An early aughts website turned modern dev playground for full-stack, DevOps and 
 * [Target Users](#target-users)
 * [Features](#features)
 * [Project Structure](#project-structure)
-* [Prerequisites](#prerequisites)
-* [Getting Started](#getting-started)
+* [Quick Start](#quick-start)
+* [Local Setup](#local-setup)
+  * [Prerequisites](#prerequisites)
   * [Dependencies](#dependencies)
   * [Installation](#installation)
   * [Configuration](#installation)
 * [Usage](#usage)
+* [Production Setup](#production-setup)
 * [System Administration](#system-administration)
 * [Author(s)](#authors)
 * [Version History](#version-history)
@@ -89,7 +91,13 @@ lafs-dev/
 └─── stay_tuned.txt
 ```
 
-## Prerequisites
+## Quick Start
+
+* NA
+
+## Local Setup
+
+### Prerequisites
 
 While technical affinity is beneficial, the true prerequisites for _LAFS-DEV_ are:
 
@@ -97,8 +105,6 @@ While technical affinity is beneficial, the true prerequisites for _LAFS-DEV_ ar
 * A thick skin for failures and the ability to view them as valuable learning opportunities
 * A capacity to inject fun into oftentimes difficult challenges
 * A sense of adventure for the long road ahead
-
-## Getting Started
 
 ### Dependencies
 
@@ -113,6 +119,10 @@ While technical affinity is beneficial, the true prerequisites for _LAFS-DEV_ ar
 * NA
 
 ## Usage
+
+* NA
+
+## Production Setup
 
 * NA
 
