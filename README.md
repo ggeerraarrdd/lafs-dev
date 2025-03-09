@@ -1,3 +1,9 @@
+<!-- markdownlint-disable MD041 -->
+[![GitHub release](https://img.shields.io/github/v/release/ggeerraarrdd/lafs-dev)](https://github.com/ggeerraarrdd/lafs-dev/releases)
+[![Maintenance](https://img.shields.io/badge/maintained-yes-green.svg)](https://github.com/ggeerraarrdd/lafs-dev/graphs/commit-activity)
+![Static Badge](https://img.shields.io/badge/repo-no_code-blue)
+<!-- markdownlint-enable MD041 -->
+
 # LAFS-DEV
 
 An early aughts website turned modern dev playground for full-stack, DevOps and system architecture skill-building
